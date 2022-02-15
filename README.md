@@ -12,4 +12,4 @@
 1. Select _Add a package..._
 1. Select the correct package, e.g. `com.thealgorithms`, so that the entire project is covered without cluttering the output with packages from `com.sun` etc.
 1. Press _OK_ to exit the _Run/Debug Configurations_ window.
-1. Select the newly created configuration in the drop down menu in the top right of IntelliJ, and run it.
+1. Select the newly created configuration in the drop down menu in the top right of IntelliJ, and run it by clicking the shield with the green arrow a bit to the right of the Run/Debug configurations drop down. On mouseover the correct button says Run 'name of config' with Coverage.
