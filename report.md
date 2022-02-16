@@ -32,6 +32,22 @@ for each project, along with reason(s) why you changed to a different one.
 4. Are exceptions taken into account in the given measurements?
 5. Is the documentation clear w.r.t. all the possible outcomes?
 
+### CCN of WordBoggle::getNeighbors
+
+Lizard counts the CCN of the method
+[`WordBoggle::getNeighbors`](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/3ff9b0fa6302aa1ccfaf2dbb55f60d60b074cf8c/Java/src/main/java/com/thealgorithms/misc/WordBoggle.java#L86)
+as 13.
+However, a manual count reveals the CCN of the method to be 8.
+
+The CCN _M_ is defined as _M_ = _E_ - _N_ + 2_P_, where _E_ is the number of
+edges in the CFG, _N_ is the number of nodes, and _P_ is the number of
+connected components. The CFG of `WordBoggle::getNeighbors` can be seen in the
+following image:
+
+![CFG of WordBoggle::getNeighbors](img/wordboggle_getneighbors_cfg.png)
+
+As can be seen in the above image, _E_ = 22, _N_ = 16, and _P_ = 1, so _M_ = 8.
+
 ## Refactoring
 
 Plan for refactoring complex code:
