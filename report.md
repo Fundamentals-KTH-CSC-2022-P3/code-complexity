@@ -32,6 +32,21 @@ for each project, along with reason(s) why you changed to a different one.
 4. Are exceptions taken into account in the given measurements?
 5. Is the documentation clear w.r.t. all the possible outcomes?
 
+Using the `lizard` tool we retrieved the following ten functions with high cyclomatic complexity numbers (CCNs): 
+
+| CCN | Function             | File                                                                            | Lines   |
+|-----|----------------------|---------------------------------------------------------------------------------|---------|
+| 13  | `calc`               | src/main/java/com/thealgorithms/others/PageRank.java                            | 28-96   |
+| 13  | `regexRecursion`     | src/main/java/com/thealgorithms/dynamicprogramming/RegexMatching.java           | 19-51   |
+| 13  | `regexRecursion`     | src/main/java/com/thealgorithms/dynamicprogramming/RegexMatching.java           | 55-84   |
+| 13  | `getNeighbors`       | src/main/java/com/thealgorithms/misc/WordBoggle.java                            | 86-121  |
+| 14  | `deleteFixup`        | src/main/java/com/thealgorithms/datastructures/trees/RedBlackBST.java           | 241-296 |
+| 15  | `calculateMaxOfMin`  | src/main/java/com/thealgorithms/datastructures/stacks/MaximumMinimumWindow.java | 40-97   |
+| 16  | `isSorted`           | src/main/java/com/thealgorithms/sorts/LinkList_Sort.java                        | 10-121  |
+| 16  | `regexRecursion`     | src/main/java/com/thealgorithms/dynamicprogramming/RegexMatching.java           | 88-121  |
+| 17  | `remove`             | src/main/java/com/thealgorithms/datastructures/trees/BinaryTree.java            | 135-229 |
+| 18  | `divideMessageWithP` | src/main/java/com/thealgorithms/others/CRCAlgorithm.java                        | 133-173 |
+
 ## Refactoring
 
 Plan for refactoring complex code:
