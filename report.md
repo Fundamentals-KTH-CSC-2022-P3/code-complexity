@@ -52,7 +52,7 @@ Using the `lizard` tool we retrieved the following ten functions with the highes
 There are several equivalent definitions of the CCN. We decided to go with the
 one described in lecture 4 of this course, where the CCN _M_ is defined as:
 
-_M = = _π_ - _s_ + 2,
+_M_ = _π_ - _s_ + 2,
 
 where _π_ is the number of decisions in the method and _s_ is the number of exit
 points. A decision is either a branching keyword (e.g. `if`, `while`, ...) or
