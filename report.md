@@ -82,8 +82,8 @@ Not applicable.
 > Is the documentation of the function clear [...]
 
 There are some comments inside the `calc` function which give an explanation to some parts of the code.
-However, the method itself has no documentation and it is, therefore, hard to understand what the calc function is supposed to do. 
-The name of the function is not the best either calc can mean many different things.
+However, the method itself has no documentation and it is, therefore, hard to understand what the `calc` function is supposed to do. 
+The name of the function is not the best either `calc` can mean many different things.
 
 ## Refactoring
 
