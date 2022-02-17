@@ -105,7 +105,7 @@ as 13.
 A manual count confirms this.
 
 Counting the number of decisions by hand gives us that _π_ = 12. There are 8 for-loops, 2 while-loops, and 2 if-statements, 
-and each of them only contains one condition which explains the _π_ we get. 
+and each of them only contains one boolean expression which explains the _π_ we get. 
 Furthermore, there is only one exit point, so the CCN _M_ = 13, which is the same result as was given to us by lizard.
 
 > Are the functions/methods with high CC also very long in terms of LOC?
