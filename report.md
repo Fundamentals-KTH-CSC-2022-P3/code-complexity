@@ -32,7 +32,7 @@ for each project, along with reason(s) why you changed to a different one.
 4. Are exceptions taken into account in the given measurements?
 5. Is the documentation clear w.r.t. all the possible outcomes?
 
-Using the `lizard` tool we retrieved the following ten functions with high cyclomatic complexity numbers (CCNs): 
+Using the `lizard` tool we retrieved the following ten functions with the highest cyclomatic complexity numbers (CCNs): 
 
 | CCN | Function             | File                                                                            | Lines   |
 |-----|----------------------|---------------------------------------------------------------------------------|---------|
