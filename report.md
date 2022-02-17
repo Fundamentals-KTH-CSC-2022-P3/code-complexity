@@ -47,6 +47,30 @@ Using the `lizard` tool we retrieved the following ten functions with the highes
 | 17  | `remove`             | src/main/java/com/thealgorithms/datastructures/trees/BinaryTree.java            | 135-229 |
 | 18  | `divideMessageWithP` | src/main/java/com/thealgorithms/others/CRCAlgorithm.java                        | 133-173 |
 
+### CCN of PageRank::calc
+
+> What are your results? 
+
+Lizard counts the CCN of the method
+[`PageRank::calc`](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/3ff9b0fa6302aa1ccfaf2dbb55f60d60b074cf8c/Java/src/main/java/com/thealgorithms/others/PageRank.java#L28)
+as 13.
+A manual count confirms this.
+
+The CCN _M_ is defined as _M_ = _π_ - _s_ + 2, where _π_ is the number of
+decisions in the method and _s_ is the number of exit point.
+
+Counting the number of decisions by hand gives us that _π_ = x, and there
+is only one exit point, so the CCN _M_ = 13, which is the same result as was
+given to us by lizard.
+
+> Are the functions/methods with high CC also very long in terms of LOC?
+
+> What is the purpose of these functions? Is it related to the high CC?
+
+> If your programming language uses exceptions: Are they taken into account by the tool?
+
+> Is the documentation of the function clear [...]
+
 ## Refactoring
 
 Plan for refactoring complex code:
