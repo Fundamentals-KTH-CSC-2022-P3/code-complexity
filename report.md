@@ -126,6 +126,43 @@ There are some comments inside the `calc` function which give an explanation to 
 However, the method itself has no documentation and it is, therefore, hard to understand what the `calc` function is supposed to do. 
 The name of the function is not the best either `calc` can mean many different things.
 
+### CCN of RedBlackBST::deleteFixup
+
+Lizard counts the CCN of the method
+
+[`RedBlackBST::deleteFixup`](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/3ff9b0fa6302aa1ccfaf2dbb55f60d60b074cf8c/Java/src/main/java/com/thealgorithms/datastructures/trees/RedBlackBST.java#L241)
+as 14.
+
+A manual count confirms this.
+
+Counting the number of decisions by hand gives us that _π_ = 13.
+
+- there is 1 while loop
+- 9 if statements
+- and 3 `&&` operators
+
+There is only one exit point.
+
+_M_ = _π_ - _s_ + 2,
+
+_M_ = 13 - 1 + 2 = 14.
+
+> Are the functions/methods with high CC also very long in terms of LOC?
+
+The method `deleteFixup` is `55` lines long, without any whitespace, so it should be considered a long function
+
+> What is the purpose of these functions? Is it related to the high CC?
+
+The class `RedBlackBST` is an implementation of a [RedBlack tree](https://en.wikipedia.org/wiki/Red%E2%80%93black_tree), which is a self balancing binary search tree.
+
+The function `deleteFixup` is called within the `delete` function. A `RBBST` is meant to have a specific coloring scheme. The purpose of this function is to restore the colouring on the nodes that remain, after one node has been deleted.
+
+> Is the documentation of the function clear [...]
+
+There is no documentation.
+
+To understand what this class and function did, we had to use wikipedia. There should be proper documentation added, also the name `deleteFixup` is pretty bad, `ensureTreeHasCorrectColouring` would have been easier to understand.
+
 ## Refactoring
 
 Plan for refactoring complex code:
