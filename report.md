@@ -59,7 +59,7 @@ The tests run quickly, on the order of tens of seconds. However, one test file
 is misnamed and therefore not executed when running the `test` target. That
 file contains a couple of failing tests.
 
-All tests that are formatted correcly pass without error.
+All tests that are formatted correctly pass without error.
 
 ## Complexity
 
