@@ -15,12 +15,51 @@ In addition, the implementation of different data structures such as stacks and 
 
 ## Onboarding experience
 
-Did it build and run as documented?
-    
-See the assignment for details; if everything works out of the box,
-there is no need to write much here. If the first project(s) you picked
-ended up being unsuitable, you can describe the "onboarding experience"
-for each project, along with reason(s) why you changed to a different one.
+We initially meant to examine the [phishman3579/java-algorithms-implementation](https://github.com/phishman3579/java-algorithms-implementation)
+repository for this assignment, but due to a lacking onboarding experience we
+decided to change projects. The main reason for this was that the test suite
+took more than two hours to run in full on a six core Intel i5-8400 CPU. This
+would have made the project very painful to work with. We could have chosen to
+limit the testing and not run the entire suite in full, but we decided that the
+easier option was to simply switch projects.
+
+Instead we chose [TheAlgorithms/Java](https://github.com/TheAlgorithms/Java)
+as the repo to study. We have onboarded successfully and aim to keep working
+with this project.
+
+### Ease of building
+
+We can build the project easily. It is a Maven repository, so it is as simple as
+`mvn compile`.
+
+> Did you have to install a lot of additional tools to build the software?
+
+No, we all had Maven installed from the last assignment.
+
+> Were those tools well documented?
+
+There were no instructions on how to compile, run, build, et.c., the project,
+but since Maven is such a standard and widespread tool, there was no need for
+any such instructions. A single line in the README declaring that the project
+utilizes Maven could perhaps be of use for people not already familiar with
+Maven.
+
+> Were other components installed automatically by the build script?
+
+Yes, for instance JUnit was listed as a dependency. Maven handled all this
+automatically.
+
+> Did the build conclude automatically without errors?
+
+Yes.
+
+> How well do examples and tests run on your system(s)?
+
+The tests run quickly, on the order of tens of seconds. However, one test file
+is misnamed and therefore not executed when running the `test` target. That
+file contains a couple of failing tests.
+
+All tests that are formatted correctly pass without error.
 
 ## Complexity
 
