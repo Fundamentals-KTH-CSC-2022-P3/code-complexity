@@ -47,6 +47,56 @@ Using the `lizard` tool we retrieved the following ten functions with the highes
 | 17  | `remove`             | src/main/java/com/thealgorithms/datastructures/trees/BinaryTree.java            | 135-229 |
 | 18  | `divideMessageWithP` | src/main/java/com/thealgorithms/others/CRCAlgorithm.java                        | 133-173 |
 
+### Method for calculation of the cyclomatic complexity numbers
+
+There are several equivalent definitions of the CCN. We decided to go with the
+one described in lecture 4 of this course, where the CCN _M_ is defined as:
+
+_M_ = _π_ - _s_ + 2,
+
+where _π_ is the number of decisions in the method and _s_ is the number of exit
+points. A decision is either a branching keyword (e.g. `if`, `while`, ...) or
+a boolean operator evaluated by the branching keyword. For example,
+`if (a && b)` counts as two decisions, since we have one keyword (`if`) and one
+boolean operator (`&&`).
+
+### CCN of WordBoggle::getNeighbors
+
+> What are your results? 
+
+Lizard counts the CCN of the method
+[`WordBoggle::getNeighbors`](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/3ff9b0fa6302aa1ccfaf2dbb55f60d60b074cf8c/Java/src/main/java/com/thealgorithms/misc/WordBoggle.java#L86)
+as 13.
+A manual count confirms this.
+
+Counting the number of decisions by hand gives us that _π_ = 12, since there are 8
+`if` statements in the method, 4 of which contains an `&&` operator, and 4 of
+which contain only a single boolean expression. Furthermore, the method contains
+only a single exit point, so the CCN _M_ = 13, which is the same result as was
+given to us by lizard.
+
+> Are the functions/methods with high CC also very long in terms of LOC?
+
+The method is definitely on the longer side, but not terribly so, since each
+`if`-statment has a body of only one line.
+
+> What is the purpose of these functions? Is it related to the high CC?
+
+The purpose is to gather all neighbors to a 2-dimensional point on a grid,
+such that no neighbor is out of bounds. It is hard to do this in a readable
+and easily understandable way that does not entail high CC. The most
+straightforward way is to do one `if`-check for each possible neighbor,
+which is what is done in the method.
+
+> If your programming language uses exceptions: Are they taken into account by the tool?
+
+Not applicable.
+
+> Is the documentation of the function clear [...]
+
+The method has no documentation at all, and the whole surrounding class is
+barely documented at all.
+
 ## Refactoring
 
 Plan for refactoring complex code:
