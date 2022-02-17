@@ -97,6 +97,35 @@ Not applicable.
 The method has no documentation at all, and the whole surrounding class is
 barely documented at all.
 
+### CCN of PageRank::calc
+
+Lizard counts the CCN of the method
+[`PageRank::calc`](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/3ff9b0fa6302aa1ccfaf2dbb55f60d60b074cf8c/Java/src/main/java/com/thealgorithms/others/PageRank.java#L28)
+as 13.
+A manual count confirms this.
+
+Counting the number of decisions by hand gives us that _π_ = 12. There are 8 for-loops, 2 while-loops, and 2 if-statements, 
+and each of them only contains one boolean expression which explains the _π_ we get. 
+Furthermore, there is only one exit point, so the CCN _M_ = 13, which is the same result as was given to us by lizard.
+
+> Are the functions/methods with high CC also very long in terms of LOC?
+
+Yes, the `calc` function is 68 lines long which can be considered a long function.
+
+> What is the purpose of these functions? Is it related to the high CC?
+
+The purpose of the function is to calculate the PageRank value of a set of nodes in a graph.
+They do this iteratively which explains why they need many loops. However, some loops are just 
+for printing the PageRank of each node, which may not be needed to have a working algorithm. 
+Consequentelly, they could reduce the CC by not printing the PageRank values, and move some parts 
+of the code to another function.
+
+> Is the documentation of the function clear [...]
+
+There are some comments inside the `calc` function which give an explanation to some parts of the code.
+However, the method itself has no documentation and it is, therefore, hard to understand what the `calc` function is supposed to do. 
+The name of the function is not the best either `calc` can mean many different things.
+
 ## Refactoring
 
 Plan for refactoring complex code:
