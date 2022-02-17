@@ -47,6 +47,19 @@ Using the `lizard` tool we retrieved the following ten functions with the highes
 | 17  | `remove`             | src/main/java/com/thealgorithms/datastructures/trees/BinaryTree.java            | 135-229 |
 | 18  | `divideMessageWithP` | src/main/java/com/thealgorithms/others/CRCAlgorithm.java                        | 133-173 |
 
+### Method for calculation of the cyclomatic complexity numbers
+
+There are several equivalent definitions of the CCN. We decided to go with the
+one described in lecture 4 of this course, where the CCN _M_ is defined as:
+
+_M = = _π_ - _s_ + 2,
+
+where _π_ is the number of decisions in the method and _s_ is the number of exit
+points. A decision is either a branching keyword (e.g. `if`, `while`, ...) or
+a boolean operator evaluated by the branching keyword. For example,
+`if (a && b)` counts as two decisions, since we have one keyword (`if`) and one
+boolean operator (`&&`).
+
 ### CCN of WordBoggle::getNeighbors
 
 > What are your results? 
@@ -56,11 +69,10 @@ Lizard counts the CCN of the method
 as 13.
 A manual count confirms this.
 
-The CCN _M_ is defined as _M_ = _π_ - _s_ + 2, where _π_ is the number of
-decisions in the method and _s_ is the number of exit point.
-
-Counting the number of decisions by hand gives us that _π_ = 12, and there
-is only one exit point, so the CCN _M_ = 13, which is the same result as was
+Counting the number of decisions by hand gives us that _π_ = 12, since there are 8
+`if` statements in the method, 4 of which contains an `&&` operator, and 4 of
+which contain only a single boolean expression. Furthermore, the method contains
+only a single exit point, so the CCN _M_ = 13, which is the same result as was
 given to us by lizard.
 
 > Are the functions/methods with high CC also very long in terms of LOC?
