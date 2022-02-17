@@ -131,9 +131,7 @@ The name of the function is not the best either `calc` can mean many different t
 Lizard counts the CCN of the method
 
 [`RedBlackBST::deleteFixup`](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/3ff9b0fa6302aa1ccfaf2dbb55f60d60b074cf8c/Java/src/main/java/com/thealgorithms/datastructures/trees/RedBlackBST.java#L241)
-as 14.
-
-A manual count confirms this.
+as 14. A manual count confirms this.
 
 Counting the number of decisions by hand gives us that _π_ = 13.
 
@@ -142,8 +140,6 @@ Counting the number of decisions by hand gives us that _π_ = 13.
 - and 3 `&&` operators
 
 There is only one exit point.
-
-_M_ = _π_ - _s_ + 2,
 
 _M_ = 13 - 1 + 2 = 14.
 
