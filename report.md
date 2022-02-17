@@ -37,16 +37,14 @@ for each project, along with reason(s) why you changed to a different one.
 Lizard counts the CCN of the method
 [`WordBoggle::getNeighbors`](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/3ff9b0fa6302aa1ccfaf2dbb55f60d60b074cf8c/Java/src/main/java/com/thealgorithms/misc/WordBoggle.java#L86)
 as 13.
-However, a manual count reveals the CCN of the method to be 8.
+A manual count confirms this.
 
-The CCN _M_ is defined as _M_ = _E_ - _N_ + 2_P_, where _E_ is the number of
-edges in the CFG, _N_ is the number of nodes, and _P_ is the number of
-connected components. The CFG of `WordBoggle::getNeighbors` can be seen in the
-following image:
+The CCN _M_ is defined as _M_ = _π_ - _s_ + 2, where _π_ is the number of
+decisions in the method and _s_ is the number of exit point.
 
-![CFG of WordBoggle::getNeighbors](img/wordboggle_getneighbors_cfg.png)
-
-As can be seen in the above image, _E_ = 22, _N_ = 16, and _P_ = 1, so _M_ = 8.
+Counting the number of decisions by hand gives us that _π_ = 12, and there
+is only one exit point, so the CCN _M_ = 13, which is the same result as was
+given to us by lizard.
 
 ## Refactoring
 
