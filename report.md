@@ -10,7 +10,7 @@ Name: TheAlgorithms/Java
 
 URL: https://github.com/TheAlgorithms/Java
 
-The repository contains the implementation of different algorithms within sorting, searching, etc. 
+The repository contains the implementation of different algorithms within sorting, searching, etc.
 In addition, the implementation of different data structures such as stacks and heaps.
 
 ## Onboarding experience
@@ -71,7 +71,7 @@ All tests that are formatted correctly pass without error.
 4. Are exceptions taken into account in the given measurements?
 5. Is the documentation clear w.r.t. all the possible outcomes?
 
-Using the `lizard` tool we retrieved the following ten functions with the highest cyclomatic complexity numbers (CCNs): 
+Using the `lizard` tool we retrieved the following ten functions with the highest cyclomatic complexity numbers (CCNs):
 
 | CCN | Function             | File                                                                            | Lines   |
 |-----|----------------------|---------------------------------------------------------------------------------|---------|
@@ -101,7 +101,7 @@ boolean operator (`&&`).
 
 ### CCN of WordBoggle::getNeighbors
 
-> What are your results? 
+> What are your results?
 
 Lizard counts the CCN of the method
 [`WordBoggle::getNeighbors`](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/3ff9b0fa6302aa1ccfaf2dbb55f60d60b074cf8c/Java/src/main/java/com/thealgorithms/misc/WordBoggle.java#L86)
@@ -143,8 +143,8 @@ Lizard counts the CCN of the method
 as 13.
 A manual count confirms this.
 
-Counting the number of decisions by hand gives us that _π_ = 12. There are 8 for-loops, 2 while-loops, and 2 if-statements, 
-and each of them only contains one boolean expression which explains the _π_ we get. 
+Counting the number of decisions by hand gives us that _π_ = 12. There are 8 for-loops, 2 while-loops, and 2 if-statements,
+and each of them only contains one boolean expression which explains the _π_ we get.
 Furthermore, there is only one exit point, so the CCN _M_ = 13, which is the same result as was given to us by lizard.
 
 > Are the functions/methods with high CC also very long in terms of LOC?
@@ -154,15 +154,15 @@ Yes, the `calc` function is 68 lines long which can be considered a long functio
 > What is the purpose of these functions? Is it related to the high CC?
 
 The purpose of the function is to calculate the PageRank value of a set of nodes in a graph.
-They do this iteratively which explains why they need many loops. However, some loops are just 
-for printing the PageRank of each node, which may not be needed to have a working algorithm. 
-Consequentelly, they could reduce the CC by not printing the PageRank values, and move some parts 
+They do this iteratively which explains why they need many loops. However, some loops are just
+for printing the PageRank of each node, which may not be needed to have a working algorithm.
+Consequentelly, they could reduce the CC by not printing the PageRank values, and move some parts
 of the code to another function.
 
 > Is the documentation of the function clear [...]
 
 There are some comments inside the `calc` function which give an explanation to some parts of the code.
-However, the method itself has no documentation and it is, therefore, hard to understand what the `calc` function is supposed to do. 
+However, the method itself has no documentation and it is, therefore, hard to understand what the `calc` function is supposed to do.
 The name of the function is not the best either `calc` can mean many different things.
 
 ### CCN of RedBlackBST::deleteFixup
@@ -197,6 +197,27 @@ The function `deleteFixup` is called within the `delete` function. A `RBBST` is 
 There is no documentation.
 
 To understand what this class and function did, we had to use wikipedia. There should be proper documentation added, also the name `deleteFixup` is pretty bad, `ensureTreeHasCorrectColouring` would have been easier to understand.
+
+### CCN of MaximumMinimumWindow::calculateMaxOfMin
+Lizard counts the CCN of the method
+[`MaximumMinimumWindow::calculateMaxOfMin`](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/main/Java/src/main/java/com/thealgorithms/datastructures/stacks/MaximumMinimumWindow.java#L40)
+as 15.
+
+A manual count confirms this:
+With 3 while loops, 7 for loops, 2 if statements, and 2 `&&` operators, we have _π_ = 14. There is only one exit point, so _s_ = 1. This implies _M_ = 14 - 1 + 2 = 15.
+
+> Are the functions/methods with high CC also very long in terms of LOC?
+
+The function `calculateMaxOfMin` has `58` physical lines of code (LOC), which can be considered as a long function.
+
+> What is the purpose of these functions? Is it related to the high CC?
+
+The function `calculateMaxOfMin` finds the maximum of minimum for every window size in a given array with time complexity _O(n)_. Comparing to the naive approach with a nested for loop that takes _O(n^2)_, the implemented approach in this function is more efficient; it has several single for loops, where which takes linear time. The CC could be reduced by implementing the naive approach, but the time complexity would get higher. Here we have a trade-off between CC and time complexity.
+
+> Is the documentation of the function clear [...]
+
+The documentation of the function `calculateMaxOfMin` explains what it does on a high level. But the documentation does not
+cover the different possible outcomes when executing different branches.
 
 ## Refactoring
 
