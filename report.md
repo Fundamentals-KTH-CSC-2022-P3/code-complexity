@@ -219,24 +219,48 @@ integrate it with your build environment?
 
 ### Your own coverage tool
 
-Show a patch (or link to a branch) that shows the instrumented code to
+> Show a patch (or link to a branch) that shows the instrumented code to
 gather coverage measurements.
 
-The patch is probably too long to be copied here, so please add
+> The patch is probably too long to be copied here, so please add
 the git command that is used to obtain the patch instead:
 
-git diff ...
+> git diff ...
 
-What kinds of constructs does your tool support, and how accurate is
+The diff for the instrumentation of one method can be seen [here](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/commit/46e474c3461864e4e914269023cc574a05f946e8).
+
+> What kinds of constructs does your tool support, and how accurate is
 its output?
+
+Our tool supports measuring coverage of any branch made by any branching construct, as long as
+the human who instruments the code is capable of rewriting the code in a correct manner. The 
+output should be completely accurate as long as no errors are introduced by the manual
+instrumentation.
 
 ### Evaluation
 
 1. How detailed is your coverage measurement?
 
+Our coverage measurements measures the branch coverage of whatever code we decide to manually
+instrument. The output given by our tool is both a branch-by-branch log of whichever branches
+went uncovered, and the total branch coverage as a percentage.
+
 2. What are the limitations of your own tool?
 
-3. Are the results of your tool consistent with existing coverage tools?
+Our own coverage tool is quite limited. To measure coverage first every branch has to be
+made explicit, by appending an `else` to every `if`, and splitting conjunctions and disjunctions
+of boolean expressions to their atomic parts.
+
+There is no support for ternary operators or exceptions. However, any code with these constructs
+could be rewritten to allow for instrumentation without great effort.
+
+The main drawback of our tool is that a great deal of repetitive and manual work is required, which
+is both boring and a major potential source of errors. Each branch has to be labeled manually, and
+when one is dealing with dozens of branches, it is inevitable that sooner or later one is mislabeled.
+
+> 3. Are the results of your tool consistent with existing coverage tools?
+
+We use Jacoco to measure branch coverage. Our own tool's results matches those given by Jacoco.
 
 ## Coverage improvement
 
