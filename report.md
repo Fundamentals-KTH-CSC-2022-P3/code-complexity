@@ -212,7 +212,7 @@ The function `calculateMaxOfMin` has `58` physical lines of code (LOC), which ca
 
 > What is the purpose of these functions? Is it related to the high CC?
 
-The function `calculateMaxOfMin` finds the maximum of minimum for every window size in a given array with time complexity _O(n)_. Comparing to the naive approach with a nested for loop that takes _O(n^2)_, the implemented approach in this function is more efficient; it has several sub-tasks of single for loop, where which takes linear time. The CC could be reduced by implementing the naive approach, but the time complexity would get higher. Here we have a trade-off between CC and time complexity.
+The function `calculateMaxOfMin` finds the maximum of minimum for every window size in a given array with time complexity _O(n)_. Comparing to the naive approach with a nested for loop that takes _O(n^2)_, the implemented approach in this function is more efficient; it has several single for loops, where which takes linear time. The CC could be reduced by implementing the naive approach, but the time complexity would get higher. Here we have a trade-off between CC and time complexity.
 
 > Is the documentation of the function clear [...]
 
