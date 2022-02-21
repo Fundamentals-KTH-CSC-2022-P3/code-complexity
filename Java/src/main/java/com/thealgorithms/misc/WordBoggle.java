@@ -83,6 +83,19 @@ public class WordBoggle {
         visited[i][j] = false;
     }
 
+    /**
+     * This method lacked tests entirely.
+     *
+     * Returns all valid neighbor coordinates in a 2d array. Invalid coordinates are exactly the same as
+     * out of bounds coordinates. Neighbors are coordinates on the form (i ± 1, j ± 1).
+     *
+     * This means that "corner" coordinates should result in three neighbors, "edge" coordinates five neighbors, and
+     * "inner" coordinates eight neighbors.
+     *
+     * N.B. I *think* that you are only ever meant to call this method with 0 ≤ i < board.length and 0 ≤ j < board[0].length
+     * and board[n].length = board[m].length for all n, m. However, no bounds checking is done in the original
+     * implementation, and no documentation was written, so this is guesswork from me. //Arvid
+     */
     public static List<Integer[]> getNeighbors(int i, int j, char[][] board) {
         List<Integer[]> neighbors = new ArrayList<>();
         if (i > 0 && j > 0) {
