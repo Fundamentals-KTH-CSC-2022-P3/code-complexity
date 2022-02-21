@@ -73,18 +73,18 @@ All tests that are formatted correctly pass without error.
 
 Using the `lizard` tool we retrieved the following ten functions with the highest cyclomatic complexity numbers (CCNs):
 
-| CCN | Function             | File                                                                            | Lines   |
-|-----|----------------------|---------------------------------------------------------------------------------|---------|
-| 13  | `calc`               | src/main/java/com/thealgorithms/others/PageRank.java                            | 28-96   |
-| 13  | `regexRecursion`     | src/main/java/com/thealgorithms/dynamicprogramming/RegexMatching.java           | 19-51   |
-| 13  | `regexRecursion`     | src/main/java/com/thealgorithms/dynamicprogramming/RegexMatching.java           | 55-84   |
-| 13  | `getNeighbors`       | src/main/java/com/thealgorithms/misc/WordBoggle.java                            | 86-121  |
-| 14  | `deleteFixup`        | src/main/java/com/thealgorithms/datastructures/trees/RedBlackBST.java           | 241-296 |
-| 15  | `calculateMaxOfMin`  | src/main/java/com/thealgorithms/datastructures/stacks/MaximumMinimumWindow.java | 40-97   |
-| 16  | `isSorted`           | src/main/java/com/thealgorithms/sorts/LinkList_Sort.java                        | 10-121  |
-| 16  | `regexRecursion`     | src/main/java/com/thealgorithms/dynamicprogramming/RegexMatching.java           | 88-121  |
-| 17  | `remove`             | src/main/java/com/thealgorithms/datastructures/trees/BinaryTree.java            | 135-229 |
-| 18  | `divideMessageWithP` | src/main/java/com/thealgorithms/others/CRCAlgorithm.java                        | 133-173 |
+| CCN | Function                                                                                                                                                                                                                    |
+|-----|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 13  | [`PageRank::calc`](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/3ff9b0fa6302aa1ccfaf2dbb55f60d60b074cf8c/Java/src/main/java/com/thealgorithms/others/PageRank.java#L28)                             |
+| 13  | [`RegexMatching::regexRecursion`](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/main/Java/src/main/java/com/thealgorithms/dynamicprogramming/RegexMatching.java#L19)                                 |
+| 13  | [`RegexMatching::regexRecursion`](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/main/Java/src/main/java/com/thealgorithms/dynamicprogramming/RegexMatching.java#L55)                                 |
+| 13  | [`WordBoggle::getNeighbors`](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/3ff9b0fa6302aa1ccfaf2dbb55f60d60b074cf8c/Java/src/main/java/com/thealgorithms/misc/WordBoggle.java#L86)                   |
+| 14  | [`RedBlackBST::deleteFixup`](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/3ff9b0fa6302aa1ccfaf2dbb55f60d60b074cf8c/Java/src/main/java/com/thealgorithms/datastructures/trees/RedBlackBST.java#L241) |
+| 15  | [`MaximumMinimumWindow::calculateMaxOfMin`](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/main/Java/src/main/java/com/thealgorithms/datastructures/stacks/MaximumMinimumWindow.java#L40)             |
+| 16  | [`LinkList_Sort::isSorted`](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/main/Java/src/main/java/com/thealgorithms/sorts/LinkList_Sort.java#L10)                                                    |
+| 16  | [`RegexMatching::regexRecursion`](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/main/Java/src/main/java/com/thealgorithms/dynamicprogramming/RegexMatching.java#L88)                                 |
+| 17  | [`BinaryTree::remove`](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/main/Java/src/main/java/com/thealgorithms/datastructures/trees/BinaryTree.java#L135)                                            |
+| 18  | [`CRCAlgorithm::divideMessageWithP`](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/main/Java/src/main/java/com/thealgorithms/others/CRCAlgorithm.java#L133)                                          |
 
 ### Method for calculation of the cyclomatic complexity numbers
 
