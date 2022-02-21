@@ -99,6 +99,68 @@ a boolean operator evaluated by the branching keyword. For example,
 `if (a && b)` counts as two decisions, since we have one keyword (`if`) and one
 boolean operator (`&&`).
 
+### CCN of RegexMatching::regexRecursion
+
+#### CCN of RegexMatching::regexRecursion (lines 19-51)
+
+> What are your results?
+
+Lizard counts the CCN of the method
+[`RegexMatching::regexRecursion (19-51)`](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/feaffd9ee121376ba15f0cd408449df5f37a42f6/Java/src/main/java/com/thealgorithms/dynamicprogramming/RegexMatching.java)
+as 13.
+A manual count reaches the CCN of 8 instead. 
+
+Counting the number of decisions by hand gives us that _π_ = 11, since there are 6 `if` 
+statements in the method, 4 of which contains an `&&` or `||` operator, and 2 of which 
+contain only a single boolean expression. There is only a single for loop. Furthermore, 
+the method 5 exit points, so the CCN _M_ = 8. It can be concluded that the method used 
+to calculate CCN in Lizard isn't extended for multiple exit points.
+
+> Is this method with high CC also very long in terms of LOC?
+
+No, the LOC is small but the CC is still high because of the amount of decisions taken in
+the same method. 
+
+> What is the purpose of this method? Is it related to the high CC?
+
+The method matches a string with a regular expression, as well as checking if recursion 
+on a substring of the string and the pattern is needed to run as well. Thus it correlates
+to the high CC, as such a process will always need many decisions. 
+
+> If your programming language uses exceptions: Are they taken into account by the tool?
+
+Since multiple exit points in general aren't being supported, there's a high likelihood 
+that exceptions would be treated the same way. 
+
+> Is the documentation of the function clear [...]
+
+The method lacks java documentation, though the comments gives a shallow explanation of 
+the reason of the method's existence. The class is barely documented at all.
+
+#### CCN of RegexMatching::regexRecursion (lines 55-84)
+
+> What are your results?
+
+Lizard counts the CCN of the method
+[`RegexMatching::regexRecursion (55-84)`](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/feaffd9ee121376ba15f0cd408449df5f37a42f6/Java/src/main/java/com/thealgorithms/dynamicprogramming/RegexMatching.java)
+as 13.
+A manual count reaches the CCN of 8 instead.
+
+The structure of the code is identical to the code in [the earlier regexRecursion method](#ccn-of-regexmatchingregexrecursion-lines-19-51)
+. It also has the same purpose and documentation, etc, as the earlier method. 
+
+#### CCN of RegexMatching::regexRecursion (lines 88-121)
+
+> What are your results?
+
+Lizard counts the CCN of the method
+[`RegexMatching::regexRecursion (88-121)`](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/feaffd9ee121376ba15f0cd408449df5f37a42f6/Java/src/main/java/com/thealgorithms/dynamicprogramming/RegexMatching.java)
+as 16.
+A manual count reaches the CCN of 10 instead.
+
+The structure of the code is almost identical to the code in [the earlier regexRecursion method](#ccn-of-regexmatchingregexrecursion-lines-19-51)
+. It also has the same purpose and documentation, etc, as the earlier methods mentioned.
+
 ### CCN of WordBoggle::getNeighbors
 
 > What are your results?
