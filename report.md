@@ -295,10 +295,11 @@ git diff ...
 
 ### Tools
 
-Document your experience in using a "new"/different coverage tool.
+We tried to integrate several different branch coverage tools including Cobertura and OpenClover but could not make them work with our Maven environment. After many trials, we finally got Jacoco working. Once the tool was in place, it was straightforward to use.
+To get a Jacoco report with different metrics including branch coverage we execute the command `mvn jacoco:prepare-agent test jacoco:report`.
+Jacoco generates a navigable website where it is easy to see the branch coverage for each package, class, and function. Having this website with all the metrics gives a nice overview of the codebase and it becomes easy to identify the functions that need additional tests. 
 
-How well was the tool documented? Was it possible/easy/difficult to
-integrate it with your build environment?
+[Here](https://fundamentals-kth-csc-2022-p3.github.io/jacoco/index.html) is a link to the generated Jacoco report before we made any branch coverage improvements.
 
 ### Your own coverage tool
 
