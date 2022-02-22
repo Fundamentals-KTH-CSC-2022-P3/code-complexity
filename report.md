@@ -227,7 +227,14 @@ the git command that is used to obtain the patch instead:
 
 > git diff ...
 
-The diff for the instrumentation of one method can be seen [here](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/commit/46e474c3461864e4e914269023cc574a05f946e8).
+We instrumented the source code manually for five methods. The five methods are as follows,
+with links to their diffs:
+
+1. [WordBoggle::getNeighbors](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/commit/46e474c3461864e4e914269023cc574a05f946e8).
+1. [Placeholder1](your-link-here)
+1. [Placeholder2](your-link-here)
+1. [Placeholder3](your-link-here)
+1. [Placeholder4](your-link-here)
 
 > What kinds of constructs does your tool support, and how accurate is
 its output?
