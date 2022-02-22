@@ -283,8 +283,6 @@ cover the different possible outcomes when executing different branches.
 
 ## Refactoring
 
-> Plan for refactoring complex code:
-
 #### WordBoggle::getNeighbors
 > Plan for refactoring complex code:
 
@@ -310,6 +308,7 @@ The refactoring was successful, and passes our test suite. It was done more or l
 the helper method the CC was reduced by less than 35%, so it was necessary to add it.
 
 In the end, `getNeighbors` had its CCN reduced from 13 to 6, and a helper method `isInBounds` with a CCN of 4 was added.
+A reduction from 13 to 6 is a reduction by 54%.
 
 > git diff ...
 
