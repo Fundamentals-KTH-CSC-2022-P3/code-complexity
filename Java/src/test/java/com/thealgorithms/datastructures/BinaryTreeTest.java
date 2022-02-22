@@ -11,7 +11,7 @@ public class BinaryTreeTest {
     static void tearDown() {
         for (int i = 0; i < BinaryTree.numBranchesInRemove; i++) {
             if (!BinaryTree.coveredBranches.contains(i)) {
-                System.out.println("Branch " + i + " not covered in WordBoggle::getNeighbors");
+                System.out.println("Branch " + i + " not covered in BinaryTree::remove");
             }
         }
         double coverage = BinaryTree.coveredBranches.size() / (double) BinaryTree.numBranchesInRemove;
