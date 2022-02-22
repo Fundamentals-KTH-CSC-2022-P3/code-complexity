@@ -2,9 +2,6 @@ package com.thealgorithms.datastructures;
 
 import com.thealgorithms.datastructures.trees.BinaryTree;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BinaryTreeTest {
     @AfterAll
