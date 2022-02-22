@@ -1,7 +1,9 @@
 package com.thealgorithms.datastructures.trees;
 
+import java.util.HashSet;
 import java.util.Queue;
 import java.util.LinkedList;
+import java.util.Set;
 
 /**
  * This entire class is used to build a Binary Tree data structure. There is the
@@ -125,6 +127,16 @@ public class BinaryTree {
             }
         }
     }
+
+    /**
+     * Total number of branches in the remove function
+     */
+    public static final int numBranchesInRemove = 25;
+
+    /**
+     * Data structure for holding coverage information of the remove function
+     */
+    public static Set<Integer> coveredBranches = new HashSet<>();
 
     /**
      * Deletes a given value from the Binary Tree
