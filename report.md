@@ -299,7 +299,7 @@ We tried to integrate several different branch coverage tools including Cobertur
 To get a Jacoco report with different metrics including branch coverage we execute the command `mvn jacoco:prepare-agent test jacoco:report`.
 Jacoco generates a navigable website where it is easy to see the branch coverage for each package, class, and function. Having this website with all the metrics gives a nice overview of the codebase and it becomes easy to identify the functions that need additional tests. 
 
-[Here](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/jacoco.zip) is a link to the generated Jacoco report before we made any branch coverage improvements.
+[Here](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/main/jacoco.zip) is a link to the generated Jacoco report before we made any branch coverage improvements.
 
 ### Your own coverage tool
 
