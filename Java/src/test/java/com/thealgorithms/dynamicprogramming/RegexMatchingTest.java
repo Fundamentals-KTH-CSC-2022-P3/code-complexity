@@ -17,13 +17,13 @@ class RegexMatchingTest {
     private static final String WORKING_TEST_PATTERN = "r*r is ? p*e";
     private static final String BAD_TEST_PATTERN = "r*r? is a? p*me";
 
-    private static final List<Pair<String, String>> BRANCH_COVERING_INPUTS = Arrays.asList(
-            new Pair<>("hello", ""),
-            new Pair<>("", "hello"),
-            new Pair<>("", "*"),
-            new Pair<>("h", "h"),
-            new Pair<>("h", "h?"),
-            new Pair<>("h ello", "h* e*o")
+    private static final List<Triple<String, String, Boolean>> BRANCH_COVERING_INPUTS = Arrays.asList(
+            new Triple<>("hello", "", false),
+            new Triple<>("", "hello", false),
+            new Triple<>("", "*", true),
+            new Triple<>("h", "h", true),
+            new Triple<>("h", "h?", false),
+            new Triple<>("h ello", "h* e*o", true)
     );
 
 
@@ -38,7 +38,7 @@ class RegexMatchingTest {
                 dynamicTestList,
                 testInput,
                 testInput.first + ":" + testInput.second,
-                Assertions::assertNotNull)
+                testInput.third ? Assertions::assertTrue : Assertions::assertFalse)
         );
 
         addMethod2ToList(dynamicTestList, WORKING_TEST_PATTERN, "Working pattern", Assertions::assertTrue);
@@ -83,7 +83,7 @@ class RegexMatchingTest {
             ));});
     }
 
-    void addMethod1ToList(List<DynamicTest> list, Pair<String, String> input, String patternName, Consumer<Boolean> assertMethod) {
+    void addMethod1ToList(List<DynamicTest> list, Triple<String, String, Boolean> input, String patternName, Consumer<Boolean> assertMethod) {
         list.add(DynamicTest.dynamicTest(
                     "RegexRecursion Method 1: " + patternName,
                     () -> assertMethod.accept(RegexMatching.regexRecursion(input.first, input.second))
@@ -91,13 +91,13 @@ class RegexMatchingTest {
         );
     }
 
-    void addMethod2ToList(List<DynamicTest> list, Pair<String, String> input, String patternName, Consumer<Boolean> assertMethod) {
+    void addMethod2ToList(List<DynamicTest> list, Triple<String, String, Boolean> input, String patternName, Consumer<Boolean> assertMethod) {
             list.add(DynamicTest.dynamicTest(
                     "RegexRecursion Method 2: " + patternName,
                     () -> assertMethod.accept(RegexMatching.regexRecursion(input.first, input.second, 0, 0))));
     }
 
-    void addMethod3ToList(List<DynamicTest> list, Pair<String, String> input, String patternName, Consumer<Boolean> assertMethod) {
+    void addMethod3ToList(List<DynamicTest> list, Triple<String, String, Boolean> input, String patternName, Consumer<Boolean> assertMethod) {
         list.add(DynamicTest.dynamicTest(
                 "RegexRecursion Method 3: " + patternName,
                 () -> assertMethod.accept(RegexMatching.regexRecursion(
@@ -110,5 +110,5 @@ class RegexMatchingTest {
         ));
     }
 
-    record Pair<T, Y>(T first, Y second) {}
+    record Triple<T, Y, U>(T first, Y second, U third) {}
 }
