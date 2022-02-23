@@ -1,10 +1,12 @@
 package com.thealgorithms.datastructures.stacks;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Stack;
 
 /**
- * Given an integer array. The task is to find the maximum of the minimum of
+ * Given a positive integer array. The task is to find the maximum of the minimum of
  * every window size in the array. Note: Window size varies from 1 to the size
  * of the Array.
  * <p>
@@ -89,10 +91,12 @@ public class MaximumMinimumWindow {
             ans[i] = Math.max(ans[i], ans[i + 1]);
         }
 
-        // Print the result
+        // Print and save the result
         for (int i = 1; i <= n; i++) {
             System.out.print(ans[i] + " ");
         }
+        // remove the first element (an unwanted 0) in ans
+        ans = Arrays.copyOfRange(ans, 1, ans.length);
         return ans;
     }
 
