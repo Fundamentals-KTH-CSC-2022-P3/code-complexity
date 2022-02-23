@@ -85,39 +85,19 @@ public class WordBoggle {
 
     public static List<Integer[]> getNeighbors(int i, int j, char[][] board) {
         List<Integer[]> neighbors = new ArrayList<>();
-        if (i > 0 && j > 0) {
-            neighbors.add(new Integer[]{i - 1, j - 1});
-        }
 
-        if (i > 0 && j < board[0].length - 1) {
-            neighbors.add(new Integer[]{i - 1, j + 1});
+        for (int x = -1; x <= 1; x++) {
+            for (int y = -1; y <= 1; y++) {
+                if ((x == 0 && y == 0) || !isInBounds(i+x, j+y, board.length, board[0].length))
+                    continue;
+                neighbors.add(new Integer[]{i + x, j + y});
+            }
         }
-
-        if (i < board.length - 1 && j < board[0].length - 1) {
-            neighbors.add(new Integer[]{i + 1, j + 1});
-        }
-
-        if (i < board.length - 1 && j > 0) {
-            neighbors.add(new Integer[]{i + 1, j - 1});
-        }
-
-        if (i > 0) {
-            neighbors.add(new Integer[]{i - 1, j});
-        }
-
-        if (i < board.length - 1) {
-            neighbors.add(new Integer[]{i + 1, j});
-        }
-
-        if (j > 0) {
-            neighbors.add(new Integer[]{i, j - 1});
-        }
-
-        if (j < board[0].length - 1) {
-            neighbors.add(new Integer[]{i, j + 1});
-        }
-
         return neighbors;
+    }
+
+    private static boolean isInBounds(int i, int j, int iMax, int jMax) {
+        return !(i < 0 || i >= iMax || j < 0 || j >= jMax);
     }
 }
 
