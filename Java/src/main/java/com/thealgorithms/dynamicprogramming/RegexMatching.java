@@ -7,6 +7,9 @@ package com.thealgorithms.dynamicprogramming;
  * characters
  *
  */
+
+import java.util.HashSet;
+
 /**
  * For calculation of Time and Space Complexity. Let N be length of src and M be
  * length of pat
@@ -14,21 +17,35 @@ package com.thealgorithms.dynamicprogramming;
  */
 public class RegexMatching {
 
+    static final HashSet<Integer> passedBranches = new HashSet<>();
+    static final int numberOfBranches = 14;
+
     // Method 1: Using Recursion
     // Time Complexity=0(2^(N+M)) Space Complexity=Recursion Extra Space
     static boolean regexRecursion(String src, String pat) {
-        if (src.length() == 0 && pat.length() == 0) {
-            return true;
-        }
-        if (src.length() != 0 && pat.length() == 0) {
+        if (pat.length() == 0) {
+            // Branch 1
+            passedBranches.add(1);
+            if (src.length() == 0) {
+                // Branch 2: Leaf 1
+                passedBranches.add(2);
+                return true;
+            }
+            // Branch 3: Leaf 2
+            passedBranches.add(3);
             return false;
-        }
-        if (src.length() == 0 && pat.length() != 0) {
+        } else if (src.length() == 0) {
             for (int i = 0; i < pat.length(); i++) {
+                // Branch 4
+                passedBranches.add(4);
                 if (pat.charAt(i) != '*') {
+                    // Branch 5: Leaf 3
+                    passedBranches.add(5);
                     return false;
                 }
             }
+            // Branch 6: Leaf 4
+            passedBranches.add(6);
             return true;
         }
         char chs = src.charAt(0);
@@ -39,14 +56,44 @@ public class RegexMatching {
 
         boolean ans;
         if (chs == chp || chp == '?') {
-            ans = regexRecursion(ros, rop);
+            // Branch 7
+            passedBranches.add(7);
+            var retval = regexRecursion(ros, rop);
+            if (retval) {
+                // Branch 8
+                passedBranches.add(8);
+                ans = true;
+            } else {
+                // Branch 9
+                passedBranches.add(9);
+                ans = false;
+            }
         } else if (chp == '*') {
+            // Branch 10
+            passedBranches.add(10);
             boolean blank = regexRecursion(src, rop);
             boolean multiple = regexRecursion(ros, pat);
-            ans = blank || multiple;
+            // Assignment of variable branching into 3
+            if (blank) {
+                // Branch 11
+                passedBranches.add(11);
+                ans = true;
+            } else if (multiple) {
+                // Branch 12
+                passedBranches.add(12);
+                ans = true;
+            } else {
+                // Branch 13
+                passedBranches.add(13);
+                ans = false;
+            }
+
         } else {
+            // Branch 14
+            passedBranches.add(14);
             ans = false;
         }
+        // Leaf 5
         return ans;
     }
 
