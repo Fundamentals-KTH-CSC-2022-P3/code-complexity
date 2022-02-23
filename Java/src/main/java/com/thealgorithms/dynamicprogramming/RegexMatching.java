@@ -16,19 +16,33 @@ public class RegexMatching {
 
     // Method 1: Using Recursion
     // Time Complexity=0(2^(N+M)) Space Complexity=Recursion Extra Space
+
+    /**
+     * This algorithm tries to match a String against a given Wildcard expansion.
+     * If the pattern contains no wildcard, the strings will need to be identical to match.
+     *
+     * @param src non-null String which is matched to our wildcard expansion
+     * @param pat non-null String which contains the wildcard to expand
+     * @return true if the wildcard pattern matches the src string
+     */
     static boolean regexRecursion(String src, String pat) {
         if (src.length() == 0 && pat.length() == 0) {
+            // An empty string and empty pattern brings us here
             return true;
         }
         if (src.length() != 0 && pat.length() == 0) {
+            // An empty pattern, but still more in our string, will bring us here
             return false;
         }
         if (src.length() == 0 && pat.length() != 0) {
+            // If we've reached the end of the src string, but there's still more in the pattern
             for (int i = 0; i < pat.length(); i++) {
                 if (pat.charAt(i) != '*') {
+                    // If every remaining character in the pattern isn't a * wildcard
                     return false;
                 }
             }
+            // We've reached the end of src, and there's only wildcards left in pattern
             return true;
         }
         char chs = src.charAt(0);
@@ -39,12 +53,19 @@ public class RegexMatching {
 
         boolean ans;
         if (chs == chp || chp == '?') {
+            // The same character is in both src and pat HEAD, or pat starts on a single char wildcard
             ans = regexRecursion(ros, rop);
         } else if (chp == '*') {
+            // If chs and chp aren't the same, and the head of the pattern starts with a * wildcard
             boolean blank = regexRecursion(src, rop);
             boolean multiple = regexRecursion(ros, pat);
+            // This here will split into multiple branches depending on the returned values:
+            // blank will continue on with testing with the rest of the pattern on the string, seeing if the wildcard
+            // has reached its end.
+            // multiple will assume that the current character in the string should be expanded by the wildcard
             ans = blank || multiple;
         } else {
+            // Otherwise there's no match, and we'll return back a false on this matching.
             ans = false;
         }
         return ans;
