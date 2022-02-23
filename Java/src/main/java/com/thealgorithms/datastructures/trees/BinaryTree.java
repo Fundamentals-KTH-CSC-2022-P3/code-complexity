@@ -133,99 +133,93 @@ public class BinaryTree {
      * @return If the value was deleted
      */
     public boolean remove(int value) {
-        // temp is the node to be deleted
-        Node temp = find(value);
-
-        // If the value doesn't exist
-        if (temp.data != value) {
+        // Using the refactored remove algorithm we actually need to
+        // do an additional check to see if the node we want to remove exists.
+        // This will increase runtime.
+        if (!contains(value)) {
             return false;
         }
 
-        // No children
-        if (temp.right == null && temp.left == null) {
-            if (temp == root) {
-                root = null;
-            } // This if/else assigns the new node to be either the left or right child of the parent
-            else if (temp.parent.data < temp.data) {
-                temp.parent.right = null;
+        root = remove(value, root);
+
+        return true;
+    }
+
+    // Recursively deletes a node from the tree.
+    private Node remove(int value, Node node) {
+        // The node does not exist.
+        if (node == null) {
+            return null;
+        }
+
+        if (value < node.data) {
+            node.left = remove(value, node.left);
+        } else if (value > node.data) {
+            node.right = remove(value, node.right);
+        } else {
+            // If the node to remove only has one child we can let the child be the successor.
+            if (node.right == null) {
+                return node.left;
+            }
+            if (node.left == null) {
+                return node.right;
+            }
+
+            // If the node to remove has two children we should delete the min node in the right sub-tree
+            // and let that node be the successor.
+
+            // Keep a temporary reference to the node that should be removed.
+            Node temp = node;
+
+            // Find the successor in the right sub-tree.
+            node = findSuccessor(temp);
+
+            // Remove the successor node from the right sub-tree and set up the correct left and right links.
+            node.right = removeMin(temp.right);
+            node.left = temp.left;
+        }
+
+        return node;
+    }
+
+    /**
+     * Deletes the minimum node in the tree.
+     *
+     * @param node the root of the tree.
+     * @return a tree where the minimum node is deleted.
+     */
+    private Node removeMin(Node node) {
+        if (node.left == null) {
+            return node.right;
+        }
+
+        node.left = removeMin(node.left);
+
+        return node;
+    }
+
+    /**
+     * Returns true if the binary tree contains the key otherwise false.
+     * This method was needed in order to write the unit-tests because the
+     * existing find method returns the parent of a node if it does not exist.
+     *
+     * @param key The key to search for.
+     * @return true if the key is found, otherwise false.
+     */
+    public boolean contains(int key) {
+        Node current = root;
+
+        while (current != null) {
+            if (key < current.data) {
+                current = current.left;
+            } else if (key > current.data) {
+                current = current.right;
             } else {
-                temp.parent.left = null;
-            }
-            return true;
-        } // Two children
-        else if (temp.left != null && temp.right != null) {
-            Node successor = findSuccessor(temp);
-
-            // The left tree of temp is made the left tree of the successor
-            successor.left = temp.left;
-            successor.left.parent = successor;
-
-            // If the successor has a right child, the child's grandparent is it's new parent
-            if (successor.parent != temp) {
-                if (successor.right != null) {
-                    successor.right.parent = successor.parent;
-                    successor.parent.left = successor.right;
-                    successor.right = temp.right;
-                    successor.right.parent = successor;
-                } else {
-                    successor.parent.left = null;
-                    successor.right = temp.right;
-                    successor.right.parent = successor;
-                }
-            }
-
-            if (temp == root) {
-                successor.parent = null;
-                root = successor;
-                return true;
-            } // If you're not deleting the root
-            else {
-                successor.parent = temp.parent;
-
-                // This if/else assigns the new node to be either the left or right child of the parent
-                if (temp.parent.data < temp.data) {
-                    temp.parent.right = successor;
-                } else {
-                    temp.parent.left = successor;
-                }
-                return true;
-            }
-        } // One child
-        else {
-            // If it has a right child
-            if (temp.right != null) {
-                if (temp == root) {
-                    root = temp.right;
-                    return true;
-                }
-
-                temp.right.parent = temp.parent;
-
-                // Assigns temp to left or right child
-                if (temp.data < temp.parent.data) {
-                    temp.parent.left = temp.right;
-                } else {
-                    temp.parent.right = temp.right;
-                }
-                return true;
-            } // If it has a left child
-            else {
-                if (temp == root) {
-                    root = temp.left;
-                    return true;
-                }
-
-                temp.left.parent = temp.parent;
-
-                // Assigns temp to left or right side
-                if (temp.data < temp.parent.data) {
-                    temp.parent.left = temp.left;
-                } else {
-                    temp.parent.right = temp.left;
-                }
                 return true;
             }
         }
+
+        return false;
     }
 
     /**
