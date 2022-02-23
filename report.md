@@ -283,13 +283,37 @@ cover the different possible outcomes when executing different branches.
 
 ## Refactoring
 
-Plan for refactoring complex code:
+#### WordBoggle::getNeighbors
 
-Estimated impact of refactoring (lower CC, but other drawbacks?).
+> Plan for refactoring complex code:
 
-Carried out refactoring (optional, P+):
+The method WordBoggle::getNeighbors returns a list of points. This is done currently with a long chain of checking that
+the first part of the coordinate is not smaller than zero, and the second part is not smaller than zero, and if the
+first is not smaller than zero, and the second is not greater than max, and ... In short, it is very verbose.
 
-git diff ...
+This could be rewritten by letting two variables loop from -1 ..  1 in nested loops, and adding these onto the
+coordinate, and then checking if it is valid. A helper method for checking validity of a coordinate could further
+offload CC from the bit method.
+
+> Estimated impact of refactoring (lower CC, but other drawbacks?).
+
+The CC of the method should, of course, be lowered. The getNeighbors method has to check for a lot of edge cases
+depending on whether the provided coordinates lie on a  top, bottom, left or right edge of the board, whether they lie
+in a corner, et.c. Thus, it is our opinion that the  current, relatively high, complexity "makes sense". Rewriting the
+method with a loop could hurt readability somewhat, but it will probably make the method a bit shorter. Nested loops
+could also be harder to reason about than loop free code, even if the CCN is lower.
+
+> Carried out refactoring (optional, P+):
+
+The refactoring was successful, and passes our test suite. It was done more or less exactly as stated above. Without
+the helper method the CC was reduced by less than 35%, so it was necessary to add it.
+
+In the end, `getNeighbors` had its CCN reduced from 13 to 6, and a helper method `isInBounds` with a CCN of 4 was added.
+A reduction from 13 to 6 is a reduction by 54%.
+
+> git diff ...
+
+The refactoring diff can be seen [here](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/commit/dee6088a9dd0044cf92e1c219787758c2c640efe).
 
 ## Coverage
 
