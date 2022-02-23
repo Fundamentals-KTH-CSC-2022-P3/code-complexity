@@ -50,19 +50,6 @@ class RegexMatchingTest {
         return dynamicTestList;
     }
 
-    @AfterAll
-    static void printEverything() {
-        if (RegexMatching.passedBranches.size() == RegexMatching.numberOfBranches) {
-            System.out.println("Full branch coverage achieved in RegexMatching::regexRecursive");
-        } else {
-            for(int i = 0; i < RegexMatching.numberOfBranches; i++) {
-                if (!RegexMatching.passedBranches.contains(i)) {
-                    System.err.println("Branch " + i + " not covered by tests");
-                }
-            }
-        }
-    }
-
     void addMethod1ToList(List<DynamicTest> list, String wildcardPattern, String patternName, Consumer<Boolean> assertMethod) {
         Arrays.stream(TEST_STRINGS).forEach(inputString -> {
             var inputPrefix = inputString.split(" ")[0];
