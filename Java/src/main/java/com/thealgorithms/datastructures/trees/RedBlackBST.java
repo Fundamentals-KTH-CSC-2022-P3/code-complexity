@@ -12,7 +12,7 @@ public class RedBlackBST {
     /**
      * Total number of branches in the deleteFixup function
      */
-    public static final int numBranchesInDeleteFixup = 2;
+    public static final int numBranchesInDeleteFixup = 26;
 
     /**
      * Data structure for holding coverage information of the remove function
@@ -256,56 +256,105 @@ public class RedBlackBST {
     }
 
     void deleteFixup(Node x) {
-        while (x != root && x.color == B) {
+        while (true) {
+            if (x == root) {
+                coveredBranches.add(0);
+                break;
+            } else {
+                coveredBranches.add(1);
+            }
+            if (!(x.color == B)) {
+                coveredBranches.add(2);
+                break;
+            } else {
+                coveredBranches.add(3);
+            }
+
             if (x == x.p.left) {
+                coveredBranches.add(4);
                 Node w = x.p.right;
                 if (w.color == R) {
+                    coveredBranches.add(5);
                     w.color = B;
                     x.p.color = R;
                     rotateLeft(x.p);
                     w = x.p.right;
+                } else {
+                    coveredBranches.add(6);
                 }
-                if (w.left.color == B && w.right.color == B) {
-                    w.color = R;
-                    x = x.p;
-                    continue;
-                } else if (w.right.color == B) {
-                    w.left.color = B;
-                    w.color = R;
-                    rotateRight(w);
-                    w = x.p.right;
+                if (w.left.color == B) {
+                    coveredBranches.add(7);
+                    if (w.right.color != B) {
+                        coveredBranches.add(8);
+                        if (w.right.color == B) {
+                            coveredBranches.add(9);
+                            w.left.color = B;
+                            w.color = R;
+                            rotateRight(w);
+                            w = x.p.right;
+                        } else {
+                            coveredBranches.add(10);
+                        }
+                    } else {
+                        w.color = R;
+                        x = x.p;
+                        coveredBranches.add(11);
+                    }
+                } else {
+                    coveredBranches.add(12);
                 }
                 if (w.right.color == R) {
+                    coveredBranches.add(13);
                     w.color = x.p.color;
                     x.p.color = B;
                     w.right.color = B;
                     rotateLeft(x.p);
                     x = root;
+                } else {
+                    coveredBranches.add(14);
                 }
             } else {
+                coveredBranches.add(15);
                 Node w = x.p.left;
                 if (w.color == R) {
+                    coveredBranches.add(16);
                     w.color = B;
                     x.p.color = R;
                     rotateRight(x.p);
                     w = x.p.left;
+                } else {
+                    coveredBranches.add(17);
                 }
-                if (w.right.color == B && w.left.color == B) {
-                    w.color = R;
-                    x = x.p;
-                    continue;
-                } else if (w.left.color == B) {
-                    w.right.color = B;
-                    w.color = R;
-                    rotateLeft(w);
-                    w = x.p.left;
+                if (w.right.color == B) {
+                    coveredBranches.add(18);
+                    if (w.left.color != B) {
+                        coveredBranches.add(19);
+                        if (w.left.color == B) {
+                            coveredBranches.add(20);
+                            w.right.color = B;
+                            w.color = R;
+                            rotateLeft(w);
+                            w = x.p.left;
+                        } else {
+                            coveredBranches.add(21);
+                        }
+                    } else {
+                        coveredBranches.add(22);
+                        w.color = R;
+                        x = x.p;
+                    }
+                } else {
+                    coveredBranches.add(23);
                 }
                 if (w.left.color == R) {
+                    coveredBranches.add(24);
                     w.color = x.p.color;
                     x.p.color = B;
                     w.left.color = B;
                     rotateRight(x.p);
                     x = root;
+                } else {
+                    coveredBranches.add(25);
                 }
             }
         }
