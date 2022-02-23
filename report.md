@@ -462,20 +462,11 @@ In total five unit-tests were added to increase the branch coverage of the `Bina
 
 ## Self-assessment: Way of working
 
-Current state according to the Essence standard: ...
-
-Was the self-assessment unanimous? Any doubts about certain items?
-
-How have you improved so far?
-
-Where is potential for improvement?
+We would say that we are in the state *In place*. We all use the same practices and tools to conduct our work. Furthermore, all team members have access to the same practices and tools that we use. There are some inconsistencies with how we do some parts of the work. For example, when it comes to reviewing pull requests some of our group members adapted a new practice for writing comments. They begin each comment with SD (should do), CD (could do), or MD (must do) to indicate how important the comment is. This is probably a good practice and suits our context, but all group members are not adapting to this way-of-working. Consequently, we do not fulfill the first criteria from the *Working well* state which is “Team members are making progress as planned by using and adapting the way-of-working to suit their current context.” To reach this state we should work on adapting our way-of-working to better suit our context, and ensure that everyone is on board with new practices such as writing SD, CD, or MD at the beginning of each pull request comment.
 
 ## Overall experience
 
-What are your main take-aways from this project? What did you learn?
-
-Is there something special you want to mention here?
-
+Working with different metrics such as cyclomatic complexity (CC) and branch coverage was a new experience for many of us. We believe that these metrics can assist the programmer when it comes to writing high-quality and correct software. Especially interesting was the branch coverage report that we could generate using Jacoco. The Jacoco report was an easy-to-read overview that made it possible to identify if important branches are not being covered by the unit tests. It would be very hard to identify lacking test coverage without an automated tool such as Jacoco. 
 
 ## Statement of Contributions
 
