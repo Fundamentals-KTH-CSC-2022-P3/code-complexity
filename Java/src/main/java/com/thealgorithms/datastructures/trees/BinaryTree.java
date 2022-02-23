@@ -1,7 +1,9 @@
 package com.thealgorithms.datastructures.trees;
 
+import java.util.HashSet;
 import java.util.Queue;
 import java.util.LinkedList;
+import java.util.Set;
 
 /**
  * This entire class is used to build a Binary Tree data structure. There is the
@@ -127,6 +129,16 @@ public class BinaryTree {
     }
 
     /**
+     * Total number of branches in the remove function
+     */
+    public static final int numBranchesInRemove = 31;
+
+    /**
+     * Data structure for holding coverage information of the remove function
+     */
+    public static Set<Integer> coveredBranches = new HashSet<>();
+
+    /**
      * Deletes a given value from the Binary Tree
      *
      * @param value Value to be deleted
@@ -136,96 +148,150 @@ public class BinaryTree {
         // temp is the node to be deleted
         Node temp = find(value);
 
+        // This is not technically a branch, but it is an edge in the CFG.
+        coveredBranches.add(0);
+
         // If the value doesn't exist
         if (temp.data != value) {
+            coveredBranches.add(1);
             return false;
+        } else {
+            coveredBranches.add(2);
         }
 
         // No children
-        if (temp.right == null && temp.left == null) {
-            if (temp == root) {
-                root = null;
-            } // This if/else assigns the new node to be either the left or right child of the parent
-            else if (temp.parent.data < temp.data) {
-                temp.parent.right = null;
+        if (temp.right == null) {
+            coveredBranches.add(3);
+
+            if (temp.left == null) {
+                coveredBranches.add(4);
+
+                if (temp == root) {
+                    coveredBranches.add(5);
+                    root = null;
+                } // This if/else assigns the new node to be either the left or right child of the parent
+                else if (temp.parent.data < temp.data) {
+                    coveredBranches.add(6);
+                    temp.parent.right = null;
+                } else {
+                    coveredBranches.add(7);
+                    temp.parent.left = null;
+                }
+                return true;
             } else {
-                temp.parent.left = null;
+                coveredBranches.add(8);
             }
-            return true;
+
         } // Two children
-        else if (temp.left != null && temp.right != null) {
-            Node successor = findSuccessor(temp);
+        else if (temp.left != null) {
+            coveredBranches.add(9);
 
-            // The left tree of temp is made the left tree of the successor
-            successor.left = temp.left;
-            successor.left.parent = successor;
+            if (temp.right != null) {
+                coveredBranches.add(10);
 
-            // If the successor has a right child, the child's grandparent is it's new parent
-            if (successor.parent != temp) {
-                if (successor.right != null) {
-                    successor.right.parent = successor.parent;
-                    successor.parent.left = successor.right;
-                    successor.right = temp.right;
-                    successor.right.parent = successor;
+                Node successor = findSuccessor(temp);
+
+                // The left tree of temp is made the left tree of the successor
+                successor.left = temp.left;
+                successor.left.parent = successor;
+
+                // If the successor has a right child, the child's grandparent is it's new parent
+                if (successor.parent != temp) {
+                    coveredBranches.add(11);
+
+                    if (successor.right != null) {
+                        coveredBranches.add(12);
+                        successor.right.parent = successor.parent;
+                        successor.parent.left = successor.right;
+                        successor.right = temp.right;
+                        successor.right.parent = successor;
+                    } else {
+                        coveredBranches.add(13);
+                        successor.parent.left = null;
+                        successor.right = temp.right;
+                        successor.right.parent = successor;
+                    }
                 } else {
-                    successor.parent.left = null;
-                    successor.right = temp.right;
-                    successor.right.parent = successor;
+                    coveredBranches.add(14);
                 }
-            }
 
-            if (temp == root) {
-                successor.parent = null;
-                root = successor;
-                return true;
-            } // If you're not deleting the root
-            else {
-                successor.parent = temp.parent;
+                if (temp == root) {
+                    coveredBranches.add(15);
+                    successor.parent = null;
+                    root = successor;
+                    return true;
+                } // If you're not deleting the root
+                else {
+                    coveredBranches.add(16);
+                    successor.parent = temp.parent;
 
-                // This if/else assigns the new node to be either the left or right child of the parent
-                if (temp.parent.data < temp.data) {
-                    temp.parent.right = successor;
-                } else {
-                    temp.parent.left = successor;
+                    // This if/else assigns the new node to be either the left or right child of the parent
+                    if (temp.parent.data < temp.data) {
+                        coveredBranches.add(17);
+                        temp.parent.right = successor;
+                    } else {
+                        coveredBranches.add(18);
+                        temp.parent.left = successor;
+                    }
+                    return true;
                 }
-                return true;
+            } else {
+               coveredBranches.add(19);
             }
         } // One child
         else {
+            coveredBranches.add(20);
+
             // If it has a right child
             if (temp.right != null) {
+                coveredBranches.add(21);
+
                 if (temp == root) {
+                    coveredBranches.add(22);
                     root = temp.right;
                     return true;
+                } else {
+                    coveredBranches.add(23);
                 }
 
                 temp.right.parent = temp.parent;
 
                 // Assigns temp to left or right child
                 if (temp.data < temp.parent.data) {
+                    coveredBranches.add(24);
                     temp.parent.left = temp.right;
                 } else {
+                    coveredBranches.add(25);
                     temp.parent.right = temp.right;
                 }
                 return true;
             } // If it has a left child
             else {
+                coveredBranches.add(26);
+
                 if (temp == root) {
+                    coveredBranches.add(27);
                     root = temp.left;
                     return true;
+                } else {
+                    coveredBranches.add(28);
                 }
 
                 temp.left.parent = temp.parent;
 
                 // Assigns temp to left or right side
                 if (temp.data < temp.parent.data) {
+                    coveredBranches.add(29);
                     temp.parent.left = temp.left;
                 } else {
+                    coveredBranches.add(30);
                     temp.parent.right = temp.left;
                 }
                 return true;
             }
         }
+
+        return false;
     }
 
     /**
