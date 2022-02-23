@@ -1,4 +1,4 @@
-package com.thealgorithms.datastructures;
+package com.thealgorithms.datastructures.trees;
 
 import com.thealgorithms.datastructures.trees.BinaryTree;
 import org.junit.jupiter.api.AfterAll;
