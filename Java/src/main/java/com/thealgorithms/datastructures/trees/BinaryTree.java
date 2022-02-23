@@ -101,6 +101,30 @@ public class BinaryTree {
     }
 
     /**
+     * Returns true if the binary tree contains the key otherwise false.
+     * This method was needed in order to write the unit-tests because the
+     * existing find method returns the parent of a node if it does not exist.
+     *
+     * @param key The key to search for.
+     * @return true if the key is found, otherwise false.
+     */
+    public boolean contains(int key) {
+        Node current = root;
+
+        while (current != null) {
+            if (key < current.data) {
+                current = current.left;
+            } else if (key > current.data) {
+                current = current.right;
+            } else {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Inserts certain value into the Binary Tree
      *
      * @param value Value to be inserted
