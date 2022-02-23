@@ -299,8 +299,6 @@ We tried to integrate several different branch coverage tools including Cobertur
 To get a Jacoco report with different metrics including branch coverage we execute the command `mvn jacoco:prepare-agent test jacoco:report`.
 Jacoco generates a navigable website where it is easy to see the branch coverage for each package, class, and function. Having this website with all the metrics gives a nice overview of the codebase and it becomes easy to identify the functions that need additional tests. 
 
-[Here](https://fundamentals-kth-csc-2022-p3.github.io/jacoco/index.html) is a link to the generated Jacoco report before we made any branch coverage improvements.
-
 ### Your own coverage tool
 
 Show a patch (or link to a branch) that shows the instrumented code to
@@ -355,17 +353,36 @@ We use Jacoco to measure branch coverage. Our own tool's results matches those g
 
 ## Coverage improvement
 
-Show the comments that describe the requirements for the coverage.
+> Generated jacoco reports
 
-Report of old coverage: [link]
+- Report of old coverage: [Link](https://fundamentals-kth-csc-2022-p3.github.io/jacoco/index.html)
+- Report of new improved coverage: [Link](https://fundamentals-kth-csc-2022-p3.github.io/jacoco/index.html)
 
-Report of new coverage: [link]
+#### WordBoggle::getNeighbors:
 
-Test cases added:
+> Show the comments that describe the requirements for the coverage.
 
-git diff ...
+```java
+/**
+ * This method lacked tests entirely.
+ *
+ * Returns all valid neighbor coordinates in a 2d array. Invalid coordinates are exactly the same as
+ * out of bounds coordinates. Neighbors are coordinates on the form (i ± 1, j ± 1).
+ *
+ * This means that "corner" coordinates should result in three neighbors, "edge" coordinates five neighbors, and
+ * "inner" coordinates eight neighbors.
+ *
+ * N.B. I *think* that you are only ever meant to call this method with 0 ≤ i < board.length and 0 ≤ j < board[0].length
+ * and board[n].length = board[m].length for all n, m. However, no bounds checking is done in the original
+ * implementation, and no documentation was written, so this is guesswork from me. //Arvid
+ */
+public static List<Integer[]> getNeighbors(int i, int j, char[][] board)
+```
 
-Number of test cases added: two per team member (P) or at least four (P+).
+> Test cases added:
+
+There were no tests for the entire WordBoggle class. The new tests can be seen [here](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/improved-coverage/Java/src/test/java/com/thealgorithms/misc/WordBoggleTest.java).
+They provide 100% branch coverage. In total five test cases were added for total branch coverage. (By Arvid.)
 
 ## Self-assessment: Way of working
 
