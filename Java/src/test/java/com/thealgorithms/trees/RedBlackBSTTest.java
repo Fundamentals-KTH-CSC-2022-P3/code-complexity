@@ -7,17 +7,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class RedBlackBSTTest {
-    @AfterAll
-    static void tearDown() {
-        for (int i = 0; i < RedBlackBST.numBranchesInDeleteFixup; i++) {
-            if (!RedBlackBST.coveredBranches.contains(i)) {
-                System.out.println("Branch " + i + " not covered in RedBlackBST::deleteFixup");
-            }
-        }
-        double coverage = RedBlackBST.coveredBranches.size() / (double) RedBlackBST.numBranchesInDeleteFixup;
-        System.out.printf("Total branch coverage of RedBlackBST::deleteFixup: %.2f%%\n", coverage*100);
-    }
-
     @Test
     void testTreeCanDeleteBlackNode() {
         RedBlackBST tree = new RedBlackBST();
