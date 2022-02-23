@@ -83,7 +83,7 @@ Using the `lizard` tool we retrieved the following ten functions with the highes
 | 15  | [`MaximumMinimumWindow::calculateMaxOfMin`](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/main/Java/src/main/java/com/thealgorithms/datastructures/stacks/MaximumMinimumWindow.java#L40)             | Find maximum of minimum for every window size in a given array.                                                         | The function has many single for-loops and can thereby solve the problem in time O(n). A naive implementation would result in lower CCN but take time O(n^2) instead.                                                             |
 | 16  | [`LinkList_Sort::isSorted`](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/main/Java/src/main/java/com/thealgorithms/sorts/LinkList_Sort.java#L10)                                                    | An example program to sort a linked list with mergesort, insertionsort or heapsort and check that the list is sorted.   | Poorly written code with a lot of repetition leads to high CCN. The CCN could easily be reduced by dividing the code into several smaller functions.                                                                              |
 | 16  | [`RegexMatching::regexRecursion`](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/main/Java/src/main/java/com/thealgorithms/dynamicprogramming/RegexMatching.java#L88)                                 | Check if a wildcard pattern that can include ´*´ and ´?´ matches with a given text.                                     | The function is of high CCN because it needs to perform many checks on the input. CCN could be reduced by splitting the code into smaller functions.                                                                              |
-| 17  | [`BinaryTree::remove`](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/main/Java/src/main/java/com/thealgorithms/datastructures/trees/BinaryTree.java#L135)                                            | Delete a node from a binary search tree (BST).                                                                          | Several checks have to be performed to ensure correct removal of a node. For example, we have to check how many children the node has and act accordingly. The high CCN may be reasonable due to the complexity of the algorithm. |
+| 17  | [`BinaryTree::remove`](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/main/Java/src/main/java/com/thealgorithms/datastructures/trees/BinaryTree.java#L135)                                            | Delete a node from a binary search tree (BST).                                                                          | Several checks have to be performed to ensure correct removal of a node. For example, we have to check how many children the node has and act accordingly. The high CCN may be reasonable due to the complexity of the algorithm. However, it is possible to reduce the CCN by switching to a recursive design. On the other hand, then we introduce other risks such as stack overflow exceptions. |
 | 18  | [`CRCAlgorithm::divideMessageWithP`](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/main/Java/src/main/java/com/thealgorithms/others/CRCAlgorithm.java#L133)                                          | The heart of the cyclic redundancy check (CRC) algorithm and will check if the message has changed during transmission. | CCN could be reduced by not considering the `boolean check` parameter and instead always check for bit errors. We don't know why the author wanted this parameter, it makes the code less readable and increases CCN.             |
 
 ### Method for calculation of the cyclomatic complexity numbers
@@ -283,13 +283,62 @@ cover the different possible outcomes when executing different branches.
 
 ## Refactoring
 
-Plan for refactoring complex code:
+#### WordBoggle::getNeighbors
 
-Estimated impact of refactoring (lower CC, but other drawbacks?).
+> Plan for refactoring complex code:
 
-Carried out refactoring (optional, P+):
+The method WordBoggle::getNeighbors returns a list of points. This is done currently with a long chain of checking that
+the first part of the coordinate is not smaller than zero, and the second part is not smaller than zero, and if the
+first is not smaller than zero, and the second is not greater than max, and ... In short, it is very verbose.
 
-git diff ...
+This could be rewritten by letting two variables loop from -1 ..  1 in nested loops, and adding these onto the
+coordinate, and then checking if it is valid. A helper method for checking validity of a coordinate could further
+offload CC from the bit method.
+
+> Estimated impact of refactoring (lower CC, but other drawbacks?).
+
+The CC of the method should, of course, be lowered. The getNeighbors method has to check for a lot of edge cases
+depending on whether the provided coordinates lie on a  top, bottom, left or right edge of the board, whether they lie
+in a corner, et.c. Thus, it is our opinion that the  current, relatively high, complexity "makes sense". Rewriting the
+method with a loop could hurt readability somewhat, but it will probably make the method a bit shorter. Nested loops
+could also be harder to reason about than loop free code, even if the CCN is lower.
+
+> Carried out refactoring (optional, P+):
+
+The refactoring was successful, and passes our test suite. It was done more or less exactly as stated above. Without
+the helper method the CC was reduced by less than 35%, so it was necessary to add it.
+
+In the end, `getNeighbors` had its CCN reduced from 13 to 6, and a helper method `isInBounds` with a CCN of 4 was added.
+A reduction from 13 to 6 is a reduction by 54%.
+
+> git diff ...
+
+The refactoring diff can be seen [here](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/commit/dee6088a9dd0044cf92e1c219787758c2c640efe).
+
+#### BinaryTree::remove
+
+> Plan for refactoring complex code:
+
+Right now the `BinaryTree::remove` function is written iteratively and contains many if-statements and loops.
+One way to lower the CC substantially would be to implement the `BinaryTree::remove` function as a recursive function. 
+This will result in lower CC because recursive function calls do not increase CC and we can remove many loops and if-statements. 
+
+> Estimated impact of refactoring (lower CC, but other drawbacks?).
+
+We will lower the CC substantially and most probably also reduce the number of lines of code (LOC), this might lead to a more readable solution.
+However, there are some downsides with a recursive implementation that needs to be considered. For example, recursive functions have more overhead 
+due to the call stack which then can harm performance. In addition, a recursive solution might run out of stack space and throw 
+a stack-overflow exception.
+
+> Carried out refactoring (optional, P+):
+
+The refactoring was successful and passes our test suite. The method `BinaryTree::remove` was divided into two different methods, one private 
+highly recursive method that the class calls internally, and another public method that the user of the interface can call. We lowered the CC 
+from 17 to 8 by doing the refactoring, which is a reduction of 53%.
+
+> git diff ...
+
+The refactoring diff can be seen [here](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/commit/491f4bec3ac84dd9355703c9514917e5bab28429).
 
 ## Coverage
 
@@ -298,8 +347,6 @@ git diff ...
 We tried to integrate several different branch coverage tools including Cobertura and OpenClover but could not make them work with our Maven environment. After many trials, we finally got Jacoco working. Once the tool was in place, it was straightforward to use.
 To get a Jacoco report with different metrics including branch coverage we execute the command `mvn jacoco:prepare-agent test jacoco:report`.
 Jacoco generates a navigable website where it is easy to see the branch coverage for each package, class, and function. Having this website with all the metrics gives a nice overview of the codebase and it becomes easy to identify the functions that need additional tests. 
-
-[Here](https://fundamentals-kth-csc-2022-p3.github.io/jacoco/index.html) is a link to the generated Jacoco report before we made any branch coverage improvements.
 
 ### Your own coverage tool
 
@@ -314,8 +361,8 @@ the git command that is used to obtain the patch instead:
 We instrumented the source code manually for five methods. The five methods are as follows,
 with links to their diffs:
 
-1. [WordBoggle::getNeighbors](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/commit/46e474c3461864e4e914269023cc574a05f946e8).
-1. [Placeholder1](your-link-here)
+1. [WordBoggle::getNeighbors](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/commit/46e474c3461864e4e914269023cc574a05f946e8)
+1. [BinaryTree::remove](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/commit/5aa576d0a666313b27b1747e81513e9f702036f7)
 1. [Placeholder2](your-link-here)
 1. [Placeholder3](your-link-here)
 1. [Placeholder4](your-link-here)
@@ -355,17 +402,63 @@ We use Jacoco to measure branch coverage. Our own tool's results matches those g
 
 ## Coverage improvement
 
-Show the comments that describe the requirements for the coverage.
+> Generated jacoco reports
 
-Report of old coverage: [link]
+- Report of old coverage: [Link](https://fundamentals-kth-csc-2022-p3.github.io/jacoco/index.html)
+- Report of new improved coverage: [Link](https://fundamentals-kth-csc-2022-p3.github.io/jacoco/index.html)
 
-Report of new coverage: [link]
+#### WordBoggle::getNeighbors:
 
-Test cases added:
+> Show the comments that describe the requirements for the coverage.
 
-git diff ...
+```java
+/**
+ * This method lacked tests entirely.
+ *
+ * Returns all valid neighbor coordinates in a 2d array. Invalid coordinates are exactly the same as
+ * out of bounds coordinates. Neighbors are coordinates on the form (i ± 1, j ± 1).
+ *
+ * This means that "corner" coordinates should result in three neighbors, "edge" coordinates five neighbors, and
+ * "inner" coordinates eight neighbors.
+ *
+ * N.B. I *think* that you are only ever meant to call this method with 0 ≤ i < board.length and 0 ≤ j < board[0].length
+ * and board[n].length = board[m].length for all n, m. However, no bounds checking is done in the original
+ * implementation, and no documentation was written, so this is guesswork from me. //Arvid
+ */
+public static List<Integer[]> getNeighbors(int i, int j, char[][] board)
+```
 
-Number of test cases added: two per team member (P) or at least four (P+).
+> Test cases added:
+
+There were no tests for the entire WordBoggle class. The new tests can be seen [here](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/improved-coverage/Java/src/test/java/com/thealgorithms/misc/WordBoggleTest.java).
+They provide 100% branch coverage. In total five test cases were added for total branch coverage. (By Arvid.)
+
+#### BinaryTree::remove:
+
+> Show the comments that describe the requirements for the coverage.
+
+The method lacked tests entirerly. But down below are the comments that describe 
+the requirements for coverage that we wrote.
+
+```java
+/**
+ * To ensure that the remove function has been properly implemented we have
+ * to test at least the following five cases:
+ * 1) It is possible to remove the root node.
+ * 2) It is possible to remove a node that does not have children.
+ * 3) It is possible to remove a node with one child. The child node should then replace the removed node.
+ * 4) It is possible to remove a node with two children. This is the most difficult case to implement.
+ *    We have two different allowed outcomes which depend on the implementation,
+ *    either the min node in the right subtree should replace the removed node,
+ *    or the max node in the left subtree should replace the removed node (both options work).
+ * 5) If the remove function is called with a key that does not exist in the tree, then we should not remove any node in the tree.
+ */
+```
+
+> Test cases added:
+
+The new tests can be seen [here](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/9b17c2f20554bd7ff8b51aec57162463e230e661/Java/src/test/java/com/thealgorithms/datastructures/BinaryTreeTest.java). 
+In total five unit-tests were added to increase the branch coverage of the `BinaryTree::remove` function from 0% to 53%.
 
 ## Self-assessment: Way of working
 
