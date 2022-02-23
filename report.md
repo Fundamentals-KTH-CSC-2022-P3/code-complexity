@@ -315,6 +315,31 @@ A reduction from 13 to 6 is a reduction by 54%.
 
 The refactoring diff can be seen [here](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/commit/dee6088a9dd0044cf92e1c219787758c2c640efe).
 
+#### BinaryTree::remove
+
+> Plan for refactoring complex code:
+
+Right now the `BinaryTree::remove` function is written iteratively and contains many if-statements and loops.
+One way to lower the CC substantially would be to implement the `BinaryTree::remove` function as a recursive function. 
+This will result in lower CC because recursive function calls do not increase CC and we can remove many loops and if-statements. 
+
+> Estimated impact of refactoring (lower CC, but other drawbacks?).
+
+We will lower the CC substantially and most probably also reduce the number of lines of code (LOC), this might lead to a more readable solution.
+However, there are some downsides with a recursive implementation that needs to be considered. For example, recursive functions have more overhead 
+due to the call stack which then can harm performance. In addition, a recursive solution might run out of stack space and throw 
+a stack-overflow exception.
+
+> Carried out refactoring (optional, P+):
+
+The refactoring was successful and passes our test suite. The method `BinaryTree::remove` was divided into two different methods, one private 
+highly recursive method that the class calls internally, and another public method that the user of the interface can call. We lowered the CC 
+from 17 to 8 by doing the refactoring, which is a reduction of 53%.
+
+> git diff ...
+
+The refactoring diff can be seen [here](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/commit/491f4bec3ac84dd9355703c9514917e5bab28429).
+
 ## Coverage
 
 ### Tools
