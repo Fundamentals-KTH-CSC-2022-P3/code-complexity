@@ -141,7 +141,7 @@ public class BinaryTree {
         }
 
         root = remove(value, root);
-        
+
         return true;
     }
 
@@ -183,7 +183,7 @@ public class BinaryTree {
     }
 
     /**
-     * Deletes the minimum node in the right sub-tree.
+     * Deletes the minimum node in the tree.
      *
      * @param node the root of the tree.
      * @return a tree where the minimum node is deleted.
