@@ -475,3 +475,42 @@ Where is potential for improvement?
 What are your main take-aways from this project? What did you learn?
 
 Is there something special you want to mention here?
+
+
+## Statement of Contributions
+
+The following is a list of each group member's main responsibilities. There were some overlap
+and collaboration in several parts, so this is not exhaustive.
+
+- Katrina Liang
+  - Calculating the CCN of MaximumMinimumWindow::calculateMaxOfMin
+  - Measure the branch coverage of MaximumMinimumWindow::calculateMaxOfMin
+  - Add tests improving the branch coverage of MaximumMinimumWindow::calculateMaxOfMin
+  - Refactor MaximumMinimumWindow::calculateMaxOfMin  to reduce CC
+- Ludwig Kristoffersson
+  - Calculating the CCN of RedBlackBST::deleteFixup
+  - Measure the branch coverage of RedBlackBST::deleteFixup
+  - Add tests improving the branch coverage of RedBlackBST::deleteFixup
+  - Refactor RedBlackBST::deleteFixup to reduce CC
+- Marcus Alevärn
+   - Document the CCN of ten functions
+   - Creation of automated branch coverage report with Jacoco
+   - Writeup on our way of working
+   - Writeup on our overall experience
+   - Calculating the CCN of PageRank::calc
+   - Measure the branch coverage of PageRank::calc
+   - Add tests improving the branch coverage of PageRank::calc
+   - Refactor PageRank::calc to reduce CC
+- Samuel Philipson
+   - Calculating the CCN of RegexMatching::regexRecursion
+   - Measure the branch coverage of RegexMatching::regexRecursion
+   - Add tests improving the branch coverage of RegexMatching::regexRecursion
+   - Refactor RegexMatching::regexRecursion to reduce CC
+- Arvid Siberov
+   - Documentation of the onboarding experience
+   - Documentation of our own coverage tool
+   - Compile the statment of contributions
+   - Calculating the CCN of WordBoggle::getNeighbors
+   - Measure the branch coverage of WordBoggle::getNeighbors
+   - Add tests improving the branch coverage of WordBoggle::getNeighbors
+   - Refactor WordBoggle::getNeighbors to reduce CC
