@@ -467,3 +467,41 @@ We would say that we are in the state *In place*. We all use the same practices 
 ## Overall experience
 
 Working with different metrics such as cyclomatic complexity (CC) and branch coverage was a new experience for many of us. We believe that these metrics can assist the programmer when it comes to writing high-quality and correct software. Especially interesting was the branch coverage report that we could generate using Jacoco. The Jacoco report was an easy-to-read overview that made it possible to identify if important branches are not being covered by the unit tests. It would be very hard to identify lacking test coverage without an automated tool such as Jacoco. 
+
+## Statement of Contributions
+
+The following is a list of each group member's main responsibilities. There were some overlap
+and collaboration in several parts, so this is not exhaustive.
+
+- Katrina Liang
+  - Calculating the CCN of MaximumMinimumWindow::calculateMaxOfMin
+  - Measure the branch coverage of MaximumMinimumWindow::calculateMaxOfMin
+  - Add tests improving the branch coverage of MaximumMinimumWindow::calculateMaxOfMin
+  - Refactor MaximumMinimumWindow::calculateMaxOfMin  to reduce CC
+- Ludwig Kristoffersson
+  - Calculating the CCN of RedBlackBST::deleteFixup
+  - Measure the branch coverage of RedBlackBST::deleteFixup
+  - Add tests improving the branch coverage of RedBlackBST::deleteFixup
+  - Refactor RedBlackBST::deleteFixup to reduce CC
+- Marcus Alevärn
+   - Document the CCN of ten functions
+   - Creation of automated branch coverage report with Jacoco
+   - Writeup on our way of working
+   - Writeup on our overall experience
+   - Calculating the CCN of PageRank::calc
+   - Measure the branch coverage of PageRank::calc
+   - Add tests improving the branch coverage of PageRank::calc
+   - Refactor PageRank::calc to reduce CC
+- Samuel Philipson
+   - Calculating the CCN of RegexMatching::regexRecursion
+   - Measure the branch coverage of RegexMatching::regexRecursion
+   - Add tests improving the branch coverage of RegexMatching::regexRecursion
+   - Refactor RegexMatching::regexRecursion to reduce CC
+- Arvid Siberov
+   - Documentation of the onboarding experience
+   - Documentation of our own coverage tool
+   - Compile the statment of contributions
+   - Calculating the CCN of WordBoggle::getNeighbors
+   - Measure the branch coverage of WordBoggle::getNeighbors
+   - Add tests improving the branch coverage of WordBoggle::getNeighbors
+   - Refactor WordBoggle::getNeighbors to reduce CC
