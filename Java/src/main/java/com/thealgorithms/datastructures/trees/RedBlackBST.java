@@ -12,7 +12,7 @@ public class RedBlackBST {
     /**
      * Total number of branches in the deleteFixup function
      */
-    public static final int numBranchesInDeleteFixup = 26;
+    public static final int numBranchesInDeleteFixup = 27;
 
     /**
      * Data structure for holding coverage information of the remove function
@@ -257,6 +257,7 @@ public class RedBlackBST {
 
     void deleteFixup(Node x) {
         while (true) {
+            coveredBranches.add(26);
             if (x == root) {
                 coveredBranches.add(0);
                 break;
