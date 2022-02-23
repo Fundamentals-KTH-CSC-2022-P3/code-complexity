@@ -1,27 +1,44 @@
 package com.thealgorithms.datastructures.trees;
 
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  * @author jack870131
  */
 public class RedBlackBST {
 
+    /**
+     * Total number of branches in the deleteFixup function
+     */
+    public static final int numBranchesInDeleteFixup = 27;
+
+    /**
+     * Data structure for holding coverage information of the remove function
+     */
+    public static Set<Integer> coveredBranches = new HashSet<>();
+
+
     private final int R = 0;
     private final int B = 1;
 
-    private class Node {
+    public class Node {
 
-        int key = -1, color = B;
-        Node left = nil, right = nil, p = nil;
+        public int key = -1, color = B;
+        public Node left = nil, right = nil, p = nil;
 
         Node(int key) {
             this.key = key;
         }
     }
 
+    public Node createNewNode(int key) {
+        return new Node(key);
+    }
+
     private final Node nil = new Node(-1);
-    private Node root = nil;
+    public Node root = nil;
 
     public void printTree(Node node) {
         if (node == nil) {
@@ -43,7 +60,7 @@ public class RedBlackBST {
         printTree(node.right);
     }
 
-    private Node findNode(Node findNode, Node node) {
+    public Node findNode(Node findNode, Node node) {
         if (root == nil) {
             return null;
         }
@@ -61,7 +78,7 @@ public class RedBlackBST {
         return null;
     }
 
-    private void insert(Node node) {
+    public void insert(Node node) {
         Node temp = root;
         if (root == nil) {
             root = node;
@@ -202,7 +219,7 @@ public class RedBlackBST {
         return subTreeRoot;
     }
 
-    boolean delete(Node z) {
+    public boolean delete(Node z) {
         if ((z = findNode(z, root)) == null) {
             return false;
         }
@@ -239,56 +256,106 @@ public class RedBlackBST {
     }
 
     void deleteFixup(Node x) {
-        while (x != root && x.color == B) {
+        while (true) {
+            coveredBranches.add(26);
+            if (x == root) {
+                coveredBranches.add(0);
+                break;
+            } else {
+                coveredBranches.add(1);
+            }
+            if (!(x.color == B)) {
+                coveredBranches.add(2);
+                break;
+            } else {
+                coveredBranches.add(3);
+            }
+
             if (x == x.p.left) {
+                coveredBranches.add(4);
                 Node w = x.p.right;
                 if (w.color == R) {
+                    coveredBranches.add(5);
                     w.color = B;
                     x.p.color = R;
                     rotateLeft(x.p);
                     w = x.p.right;
+                } else {
+                    coveredBranches.add(6);
                 }
-                if (w.left.color == B && w.right.color == B) {
-                    w.color = R;
-                    x = x.p;
-                    continue;
-                } else if (w.right.color == B) {
-                    w.left.color = B;
-                    w.color = R;
-                    rotateRight(w);
-                    w = x.p.right;
+                if (w.left.color == B) {
+                    coveredBranches.add(7);
+                    if (w.right.color != B) {
+                        coveredBranches.add(8);
+                        if (w.right.color == B) {
+                            coveredBranches.add(9);
+                            w.left.color = B;
+                            w.color = R;
+                            rotateRight(w);
+                            w = x.p.right;
+                        } else {
+                            coveredBranches.add(10);
+                        }
+                    } else {
+                        w.color = R;
+                        x = x.p;
+                        coveredBranches.add(11);
+                    }
+                } else {
+                    coveredBranches.add(12);
                 }
                 if (w.right.color == R) {
+                    coveredBranches.add(13);
                     w.color = x.p.color;
                     x.p.color = B;
                     w.right.color = B;
                     rotateLeft(x.p);
                     x = root;
+                } else {
+                    coveredBranches.add(14);
                 }
             } else {
+                coveredBranches.add(15);
                 Node w = x.p.left;
                 if (w.color == R) {
+                    coveredBranches.add(16);
                     w.color = B;
                     x.p.color = R;
                     rotateRight(x.p);
                     w = x.p.left;
+                } else {
+                    coveredBranches.add(17);
                 }
-                if (w.right.color == B && w.left.color == B) {
-                    w.color = R;
-                    x = x.p;
-                    continue;
-                } else if (w.left.color == B) {
-                    w.right.color = B;
-                    w.color = R;
-                    rotateLeft(w);
-                    w = x.p.left;
+                if (w.right.color == B) {
+                    coveredBranches.add(18);
+                    if (w.left.color != B) {
+                        coveredBranches.add(19);
+                        if (w.left.color == B) {
+                            coveredBranches.add(20);
+                            w.right.color = B;
+                            w.color = R;
+                            rotateLeft(w);
+                            w = x.p.left;
+                        } else {
+                            coveredBranches.add(21);
+                        }
+                    } else {
+                        coveredBranches.add(22);
+                        w.color = R;
+                        x = x.p;
+                    }
+                } else {
+                    coveredBranches.add(23);
                 }
                 if (w.left.color == R) {
+                    coveredBranches.add(24);
                     w.color = x.p.color;
                     x.p.color = B;
                     w.left.color = B;
                     rotateRight(x.p);
                     x = root;
+                } else {
+                    coveredBranches.add(25);
                 }
             }
         }
@@ -336,5 +403,10 @@ public class RedBlackBST {
         System.out.println("Pre order");
         printTreepre(root);
         scan.close();
+    }
+
+    public static void main( String[] args ) {
+        RedBlackBST tree = new RedBlackBST();
+        tree.insertDemo();
     }
 }
