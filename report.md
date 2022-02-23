@@ -314,8 +314,8 @@ the git command that is used to obtain the patch instead:
 We instrumented the source code manually for five methods. The five methods are as follows,
 with links to their diffs:
 
-1. [WordBoggle::getNeighbors](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/commit/46e474c3461864e4e914269023cc574a05f946e8).
-1. [Placeholder1](your-link-here)
+1. [WordBoggle::getNeighbors](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/commit/46e474c3461864e4e914269023cc574a05f946e8)
+1. [BinaryTree::remove](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/commit/5aa576d0a666313b27b1747e81513e9f702036f7)
 1. [Placeholder2](your-link-here)
 1. [Placeholder3](your-link-here)
 1. [Placeholder4](your-link-here)
