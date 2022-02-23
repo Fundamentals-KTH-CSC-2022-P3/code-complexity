@@ -408,6 +408,33 @@ public static List<Integer[]> getNeighbors(int i, int j, char[][] board)
 There were no tests for the entire WordBoggle class. The new tests can be seen [here](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/improved-coverage/Java/src/test/java/com/thealgorithms/misc/WordBoggleTest.java).
 They provide 100% branch coverage. In total five test cases were added for total branch coverage. (By Arvid.)
 
+#### BinaryTree::remove:
+
+> Show the comments that describe the requirements for the coverage.
+
+The method lacked tests entirerly. But down below are the comments that describe 
+the requirements for coverage that we wrote.
+
+```java
+/**
+ * To ensure that the remove function has been properly implemented we have
+ * to test at least the following five cases:
+ * 1) It is possible to remove the root node.
+ * 2) It is possible to remove a node that does not have children.
+ * 3) It is possible to remove a node with one child. The child node should then replace the removed node.
+ * 4) It is possible to remove a node with two children. This is the most difficult case to implement.
+ *    We have two different allowed outcomes which depend on the implementation,
+ *    either the min node in the right subtree should replace the removed node,
+ *    or the max node in the left subtree should replace the removed node (both options work).
+ * 5) If the remove function is called with a key that does not exist in the tree, then we should not remove any node in the tree.
+ */
+```
+
+> Test cases added:
+
+The new tests can be seen [here](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/9b17c2f20554bd7ff8b51aec57162463e230e661/Java/src/test/java/com/thealgorithms/datastructures/BinaryTreeTest.java). 
+In total five unit-tests were added to increase the branch coverage of the `BinaryTree::remove` function from 0% to 53%.
+
 ## Self-assessment: Way of working
 
 Current state according to the Essence standard: ...
