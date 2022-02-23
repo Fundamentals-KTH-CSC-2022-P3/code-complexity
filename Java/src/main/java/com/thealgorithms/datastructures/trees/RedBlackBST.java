@@ -1,11 +1,24 @@
 package com.thealgorithms.datastructures.trees;
 
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  * @author jack870131
  */
 public class RedBlackBST {
+
+    /**
+     * Total number of branches in the deleteFixup function
+     */
+    public static final int numBranchesInDeleteFixup = 2;
+
+    /**
+     * Data structure for holding coverage information of the remove function
+     */
+    public static Set<Integer> coveredBranches = new HashSet<>();
+
 
     private final int R = 0;
     private final int B = 1;
