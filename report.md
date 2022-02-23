@@ -283,6 +283,34 @@ cover the different possible outcomes when executing different branches.
 
 ## Refactoring
 
+#### RegexMatcher::regexRecursion (19-51)
+> Plan for refactoring complex code:
+
+The code is quite verbose, with choices of using multiple if statements with _&&_ additions instead of writing nested
+if statements, leading to a higher complexity. Moving towards using nested if statements would thus decrease the
+complexity. There's also a lot of code copied between other methods in this class, all of which are on the top 10 list
+of classes with high complexity. Breaking this code out into methods would be preferred to decrease complexity further.
+And lastly, instead of setting a variable to different values in an if statement and then returning it, doing a quick
+return inside the if else statements would increase the number of exit nodes, thus lowering the CC even more.
+
+> Estimated impact of refactoring (lower CC, but other drawbacks?).
+
+The refactoring will, through use of better naming as well as decreasing the CC, make the code more readable as well as
+decrease overall class size, as the splitting up of the method into smaller methods will allow the other methods in the
+same class to use those as well.
+But if we're singlehandedly focusing on reducing CC, the code will become messier,
+since we'll be waning to introduce as many return-statements as possible to reduce the impact of the necessary CC
+created by the if statements.
+
+> Carried out refactoring (optional, P+):
+
+The refactor was succesful, with the CC being lowered by 37.5% when using the CC count with multiple end nodes. With the
+introduction of a helper method, as well as an increase in return statements, the CC was lowered at a cost of readability.
+
+> git diff ...
+
+The refactoring diff can be seen [here](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/commit/6a0bbb4036f2eb9e8cce4f9086f474000e04acff).
+
 #### WordBoggle::getNeighbors
 
 > Plan for refactoring complex code:
