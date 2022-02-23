@@ -1,6 +1,8 @@
 package com.thealgorithms.datastructures.trees;
 
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  * @author jack870131
@@ -10,18 +12,22 @@ public class RedBlackBST {
     private final int R = 0;
     private final int B = 1;
 
-    private class Node {
+    public class Node {
 
-        int key = -1, color = B;
-        Node left = nil, right = nil, p = nil;
+        public int key = -1, color = B;
+        public Node left = nil, right = nil, p = nil;
 
         Node(int key) {
             this.key = key;
         }
     }
 
+    public Node createNewNode(int key) {
+        return new Node(key);
+    }
+
     private final Node nil = new Node(-1);
-    private Node root = nil;
+    public Node root = nil;
 
     public void printTree(Node node) {
         if (node == nil) {
@@ -43,7 +49,7 @@ public class RedBlackBST {
         printTree(node.right);
     }
 
-    private Node findNode(Node findNode, Node node) {
+    public Node findNode(Node findNode, Node node) {
         if (root == nil) {
             return null;
         }
@@ -61,7 +67,7 @@ public class RedBlackBST {
         return null;
     }
 
-    private void insert(Node node) {
+    public void insert(Node node) {
         Node temp = root;
         if (root == nil) {
             root = node;
@@ -202,7 +208,7 @@ public class RedBlackBST {
         return subTreeRoot;
     }
 
-    boolean delete(Node z) {
+    public boolean delete(Node z) {
         if ((z = findNode(z, root)) == null) {
             return false;
         }
@@ -336,5 +342,10 @@ public class RedBlackBST {
         System.out.println("Pre order");
         printTreepre(root);
         scan.close();
+    }
+
+    public static void main( String[] args ) {
+        RedBlackBST tree = new RedBlackBST();
+        tree.insertDemo();
     }
 }
