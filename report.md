@@ -472,6 +472,4 @@ Where is potential for improvement?
 
 ## Overall experience
 
-What are your main take-aways from this project? What did you learn?
-
-Is there something special you want to mention here?
+Working with different metrics such as cyclomatic complexity (CC) and branch coverage was a new experience for many of us. We believe that these metrics can assist the programmer when it comes to writing high-quality and correct software. Especially interesting was the branch coverage report that we could generate using Jacoco. The Jacoco report was an easy-to-read overview that made it possible to identify if important branches are not being covered by the unit tests. It would be very hard to identify lacking test coverage without an automated tool such as Jacoco. 
