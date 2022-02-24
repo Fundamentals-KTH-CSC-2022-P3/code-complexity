@@ -108,33 +108,33 @@ boolean operator (`&&`).
 Lizard counts the CCN of the method
 [`RegexMatching::regexRecursion (19-51)`](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/feaffd9ee121376ba15f0cd408449df5f37a42f6/Java/src/main/java/com/thealgorithms/dynamicprogramming/RegexMatching.java)
 as 13.
-A manual count reaches the CCN of 8 instead. 
+A manual count reaches the CCN of 8 instead.
 
-Counting the number of decisions by hand gives us that _π_ = 11, since there are 6 `if` 
-statements in the method, 4 of which contains an `&&` or `||` operator, and 2 of which 
-contain only a single boolean expression. There is only a single for loop. Furthermore, 
-the method 5 exit points, so the CCN _M_ = 8. It can be concluded that the method used 
+Counting the number of decisions by hand gives us that _π_ = 11, since there are 6 `if`
+statements in the method, 4 of which contains an `&&` or `||` operator, and 2 of which
+contain only a single boolean expression. There is only a single for loop. Furthermore,
+the method 5 exit points, so the CCN _M_ = 8. It can be concluded that the method used
 to calculate CCN in Lizard isn't extended for multiple exit points.
 
 > Is this method with high CC also very long in terms of LOC?
 
 No, the LOC is small but the CC is still high because of the amount of decisions taken in
-the same method. 
+the same method.
 
 > What is the purpose of this method? Is it related to the high CC?
 
-The method matches a string with a regular expression, as well as checking if recursion 
+The method matches a string with a regular expression, as well as checking if recursion
 on a substring of the string and the pattern is needed to run as well. Thus it correlates
-to the high CC, as such a process will always need many decisions. 
+to the high CC, as such a process will always need many decisions.
 
 > If your programming language uses exceptions: Are they taken into account by the tool?
 
-Since multiple exit points in general aren't being supported, there's a high likelihood 
-that exceptions would be treated the same way. 
+Since multiple exit points in general aren't being supported, there's a high likelihood
+that exceptions would be treated the same way.
 
 > Is the documentation of the function clear [...]
 
-The method lacks java documentation, though the comments gives a shallow explanation of 
+The method lacks java documentation, though the comments gives a shallow explanation of
 the reason of the method's existence. The class is barely documented at all.
 
 #### CCN of RegexMatching::regexRecursion (lines 55-84)
@@ -147,7 +147,7 @@ as 13.
 A manual count reaches the CCN of 8 instead.
 
 The structure of the code is identical to the code in [the earlier regexRecursion method](#ccn-of-regexmatchingregexrecursion-lines-19-51)
-. It also has the same purpose and documentation, etc, as the earlier method. 
+. It also has the same purpose and documentation, etc, as the earlier method.
 
 #### CCN of RegexMatching::regexRecursion (lines 88-121)
 
@@ -274,7 +274,7 @@ The function `calculateMaxOfMin` has `58` physical lines of code (LOC), which ca
 
 > What is the purpose of these functions? Is it related to the high CC?
 
-The function `calculateMaxOfMin` finds the maximum of minimum for every window size in a given array with time complexity _O(n)_. Comparing to the naive approach with a nested for loop that takes _O(n^2)_, the implemented approach in this function is more efficient; it has several single for loops, where which takes linear time. The CC could be reduced by implementing the naive approach, but the time complexity would get higher. Here we have a trade-off between CC and time complexity.
+The function `calculateMaxOfMin` finds the maximum of minimum for every window size in a given array with time complexity _O(n)_. Comparing to the naive approach with a nested triple for loop that takes _O(n^3)_, the implemented approach in this function is more efficient; it has several single for loops, where which takes linear time. The CC could be reduced by implementing the naive approach, but the time complexity would get higher. Here we have a trade-off between CC and time complexity.
 
 > Is the documentation of the function clear [...]
 
@@ -348,25 +348,46 @@ The refactoring diff can be seen [here](https://github.com/Fundamentals-KTH-CSC-
 > Plan for refactoring complex code:
 
 Right now the `BinaryTree::remove` function is written iteratively and contains many if-statements and loops.
-One way to lower the CC substantially would be to implement the `BinaryTree::remove` function as a recursive function. 
-This will result in lower CC because recursive function calls do not increase CC and we can remove many loops and if-statements. 
+One way to lower the CC substantially would be to implement the `BinaryTree::remove` function as a recursive function.
+This will result in lower CC because recursive function calls do not increase CC and we can remove many loops and if-statements.
 
 > Estimated impact of refactoring (lower CC, but other drawbacks?).
 
 We will lower the CC substantially and most probably also reduce the number of lines of code (LOC), this might lead to a more readable solution.
-However, there are some downsides with a recursive implementation that needs to be considered. For example, recursive functions have more overhead 
-due to the call stack which then can harm performance. In addition, a recursive solution might run out of stack space and throw 
+However, there are some downsides with a recursive implementation that needs to be considered. For example, recursive functions have more overhead
+due to the call stack which then can harm performance. In addition, a recursive solution might run out of stack space and throw
 a stack-overflow exception.
 
 > Carried out refactoring (optional, P+):
 
-The refactoring was successful and passes our test suite. The method `BinaryTree::remove` was divided into two different methods, one private 
-highly recursive method that the class calls internally, and another public method that the user of the interface can call. We lowered the CC 
+The refactoring was successful and passes our test suite. The method `BinaryTree::remove` was divided into two different methods, one private
+highly recursive method that the class calls internally, and another public method that the user of the interface can call. We lowered the CC
 from 17 to 8 by doing the refactoring, which is a reduction of 53%.
 
 > git diff ...
 
 The refactoring diff can be seen [here](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/commit/491f4bec3ac84dd9355703c9514917e5bab28429).
+
+#### MaximumMinimumWindow::calculateMaxOfMin
+
+> Plan for refactoring complex code:
+
+As mentioned in section CCN of MaximumMinimumWindow::calculateMaxOfMin, the function `MaximumMinimumWindow::calculateMaxOfMin` implements several for-loops to reduce the time complexity of the algorithm at the expense of the cyclomatic complexity. However, it is however possible to reduce the CC by dividing the function into several smaller functions.
+
+In `MaximumMinimumWindow::calculateMaxOfMin`, two arrays are created to store the indexes of the first smaller elements on the _left_ side of each element, and the first smaller elements on the _right_ side of each element. These two arrays could be created in two separate private functions: `smallerOnLeft` and `smallerOnRight`. The function `calculateMaxOfMin` will call these two functions and find the final answer.
+
+> Estimated impact of refactoring (lower CC, but other drawbacks?).
+
+The CC will essentially be reduced by splitting the function into several smaller functions. The program will also be more readable.
+
+> Carried out refactoring (optional, P+):
+
+After refactoring, with 4 for-loops and 1 exit point, the function `calculateMaxOfMin` has a new CC of _M_ = 4 - 1 + 2 = 5, which is a reduction of 67% (CC before was 15). Both of the newly implemented functions `smallerOnLeft` and `smallerOnRight` has a CC of _M_ = 4 - 1 + 2 = 5.
+
+> git diff ...
+
+The refactoring diff can be found [here](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/commit/21eacbae9165cff80c1364c6532ab1b62e1428fd).
+
 
 ## Coverage
 
@@ -374,7 +395,7 @@ The refactoring diff can be seen [here](https://github.com/Fundamentals-KTH-CSC-
 
 We tried to integrate several different branch coverage tools including Cobertura and OpenClover but could not make them work with our Maven environment. After many trials, we finally got Jacoco working. Once the tool was in place, it was straightforward to use.
 To get a Jacoco report with different metrics including branch coverage we execute the command `mvn jacoco:prepare-agent test jacoco:report`.
-Jacoco generates a navigable website where it is easy to see the branch coverage for each package, class, and function. Having this website with all the metrics gives a nice overview of the codebase and it becomes easy to identify the functions that need additional tests. 
+Jacoco generates a navigable website where it is easy to see the branch coverage for each package, class, and function. Having this website with all the metrics gives a nice overview of the codebase and it becomes easy to identify the functions that need additional tests.
 
 ### Your own coverage tool
 
@@ -391,7 +412,7 @@ with links to their diffs:
 
 1. [WordBoggle::getNeighbors](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/commit/46e474c3461864e4e914269023cc574a05f946e8)
 1. [BinaryTree::remove](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/commit/5aa576d0a666313b27b1747e81513e9f702036f7)
-1. [Placeholder2](your-link-here)
+1. [MaximumMinimumWindow::calculateMinofMax](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/commit/c72ddd705de1f2a008c04466bd03c966539075e8)
 1. [Placeholder3](your-link-here)
 1. [Placeholder4](your-link-here)
 
@@ -399,7 +420,7 @@ with links to their diffs:
 its output?
 
 Our tool supports measuring coverage of any branch made by any branching construct, as long as
-the human who instruments the code is capable of rewriting the code in a correct manner. The 
+the human who instruments the code is capable of rewriting the code in a correct manner. The
 output should be completely accurate as long as no errors are introduced by the manual
 instrumentation.
 
@@ -465,7 +486,7 @@ They provide 100% branch coverage. In total five test cases were added for total
 
 > Show the comments that describe the requirements for the coverage.
 
-The method lacked tests entirerly. But down below are the comments that describe 
+The method lacked tests entirerly. But down below are the comments that describe
 the requirements for coverage that we wrote.
 
 ```java
@@ -485,7 +506,7 @@ the requirements for coverage that we wrote.
 
 > Test cases added:
 
-The new tests can be seen [here](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/9b17c2f20554bd7ff8b51aec57162463e230e661/Java/src/test/java/com/thealgorithms/datastructures/BinaryTreeTest.java). 
+The new tests can be seen [here](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/9b17c2f20554bd7ff8b51aec57162463e230e661/Java/src/test/java/com/thealgorithms/datastructures/BinaryTreeTest.java).
 In total five unit-tests were added to increase the branch coverage of the `BinaryTree::remove` function from 0% to 53%.
 
 ## Self-assessment: Way of working
@@ -494,7 +515,7 @@ We would say that we are in the state *In place*. We all use the same practices 
 
 ## Overall experience
 
-Working with different metrics such as cyclomatic complexity (CC) and branch coverage was a new experience for many of us. We believe that these metrics can assist the programmer when it comes to writing high-quality and correct software. Especially interesting was the branch coverage report that we could generate using Jacoco. The Jacoco report was an easy-to-read overview that made it possible to identify if important branches are not being covered by the unit tests. It would be very hard to identify lacking test coverage without an automated tool such as Jacoco. 
+Working with different metrics such as cyclomatic complexity (CC) and branch coverage was a new experience for many of us. We believe that these metrics can assist the programmer when it comes to writing high-quality and correct software. Especially interesting was the branch coverage report that we could generate using Jacoco. The Jacoco report was an easy-to-read overview that made it possible to identify if important branches are not being covered by the unit tests. It would be very hard to identify lacking test coverage without an automated tool such as Jacoco.
 
 ## Statement of Contributions
 
