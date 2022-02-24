@@ -467,7 +467,7 @@ We use Jacoco to measure branch coverage. Our own tool's results matches those g
 > Generated jacoco reports
 
 - Report of old coverage: [Link](https://fundamentals-kth-csc-2022-p3.github.io/jacoco/index.html)
-- Report of new improved coverage: [Link](https://fundamentals-kth-csc-2022-p3.github.io/jacoco/index.html)
+- Report of new improved coverage: [Link](https://fundamentals-kth-csc-2022-p3.github.io/jacoco-improved/index.html)
 
 #### WordBoggle::getNeighbors:
 
