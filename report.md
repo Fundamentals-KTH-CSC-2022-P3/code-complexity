@@ -108,33 +108,33 @@ boolean operator (`&&`).
 Lizard counts the CCN of the method
 [`RegexMatching::regexRecursion (19-51)`](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/blob/feaffd9ee121376ba15f0cd408449df5f37a42f6/Java/src/main/java/com/thealgorithms/dynamicprogramming/RegexMatching.java)
 as 13.
-A manual count reaches the CCN of 8 instead. 
+A manual count reaches the CCN of 8 instead.
 
-Counting the number of decisions by hand gives us that _π_ = 11, since there are 6 `if` 
-statements in the method, 4 of which contains an `&&` or `||` operator, and 2 of which 
-contain only a single boolean expression. There is only a single for loop. Furthermore, 
-the method 5 exit points, so the CCN _M_ = 8. It can be concluded that the method used 
+Counting the number of decisions by hand gives us that _π_ = 11, since there are 6 `if`
+statements in the method, 4 of which contains an `&&` or `||` operator, and 2 of which
+contain only a single boolean expression. There is only a single for loop. Furthermore,
+the method 5 exit points, so the CCN _M_ = 8. It can be concluded that the method used
 to calculate CCN in Lizard isn't extended for multiple exit points.
 
 > Is this method with high CC also very long in terms of LOC?
 
 No, the LOC is small but the CC is still high because of the amount of decisions taken in
-the same method. 
+the same method.
 
 > What is the purpose of this method? Is it related to the high CC?
 
-The method matches a string with a regular expression, as well as checking if recursion 
+The method matches a string with a regular expression, as well as checking if recursion
 on a substring of the string and the pattern is needed to run as well. Thus it correlates
-to the high CC, as such a process will always need many decisions. 
+to the high CC, as such a process will always need many decisions.
 
 > If your programming language uses exceptions: Are they taken into account by the tool?
 
-Since multiple exit points in general aren't being supported, there's a high likelihood 
-that exceptions would be treated the same way. 
+Since multiple exit points in general aren't being supported, there's a high likelihood
+that exceptions would be treated the same way.
 
 > Is the documentation of the function clear [...]
 
-The method lacks java documentation, though the comments gives a shallow explanation of 
+The method lacks java documentation, though the comments gives a shallow explanation of
 the reason of the method's existence. The class is barely documented at all.
 
 #### CCN of RegexMatching::regexRecursion (lines 55-84)
@@ -147,7 +147,7 @@ as 13.
 A manual count reaches the CCN of 8 instead.
 
 The structure of the code is identical to the code in [the earlier regexRecursion method](#ccn-of-regexmatchingregexrecursion-lines-19-51)
-. It also has the same purpose and documentation, etc, as the earlier method. 
+. It also has the same purpose and documentation, etc, as the earlier method.
 
 #### CCN of RegexMatching::regexRecursion (lines 88-121)
 
@@ -274,7 +274,7 @@ The function `calculateMaxOfMin` has `58` physical lines of code (LOC), which ca
 
 > What is the purpose of these functions? Is it related to the high CC?
 
-The function `calculateMaxOfMin` finds the maximum of minimum for every window size in a given array with time complexity _O(n)_. Comparing to the naive approach with a nested for loop that takes _O(n^2)_, the implemented approach in this function is more efficient; it has several single for loops, where which takes linear time. The CC could be reduced by implementing the naive approach, but the time complexity would get higher. Here we have a trade-off between CC and time complexity.
+The function `calculateMaxOfMin` finds the maximum of minimum for every window size in a given array with time complexity _O(n)_. Comparing to the naive approach with a nested triple for loop that takes _O(n^3)_, the implemented approach in this function is more efficient; it has several single for loops, where which takes linear time. The CC could be reduced by implementing the naive approach, but the time complexity would get higher. Here we have a trade-off between CC and time complexity.
 
 > Is the documentation of the function clear [...]
 
@@ -314,6 +314,30 @@ A reduction from 13 to 6 is a reduction by 54%.
 
 The refactoring diff can be seen [here](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/commit/dee6088a9dd0044cf92e1c219787758c2c640efe).
 
+
+
+
+#### MaximumMinimumWindow::calculateMaxOfMin
+
+> Plan for refactoring complex code:
+
+As mentioned in section CCN of MaximumMinimumWindow::calculateMaxOfMin, the function `MaximumMinimumWindow::calculateMaxOfMin` implements several for-loops to reduce the time complexity of the algorithm at the expense of the cyclomatic complexity. However, it is however possible to reduce the CC by dividing the function into several smaller functions.
+
+In `MaximumMinimumWindow::calculateMaxOfMin`, two arrays are created to store the indexes of the first smaller elements on the _left_ side of each element, and the first smaller elements on the _right_ side of each element. These two arrays could be created in two separate private functions: `smallerOnLeft` and `smallerOnRight`. The function `calculateMaxOfMin` will call these two functions and find the final answer.
+
+> Estimated impact of refactoring (lower CC, but other drawbacks?).
+
+The CC will essentially be reduced by splitting the function into several smaller functions. The program will also be more readable.
+
+> Carried out refactoring (optional, P+):
+
+After refactoring, with 4 for-loops and 1 exit point, the function `calculateMaxOfMin` has a new CC of _M_ = 4 - 1 + 2 = 5, which is a reduction of 67% (CC before was 15). Both of the newly implemented functions `smallerOnLeft` and `smallerOnRight` has a CC of _M_ = 4 - 1 + 2 = 5.
+
+> git diff ...
+
+The refactoring diff can be found [here](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/commit/21eacbae9165cff80c1364c6532ab1b62e1428fd).
+
+
 #### RegexMatcher::regexRecursion (19-51)
 > Plan for refactoring complex code:
 
@@ -341,6 +365,7 @@ introduction of a helper method, as well as an increase in return statements, th
 > git diff ...
 
 The refactoring diff can be seen [here](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/commit/6a0bbb4036f2eb9e8cce4f9086f474000e04acff).
+
 
 ## Coverage
 
