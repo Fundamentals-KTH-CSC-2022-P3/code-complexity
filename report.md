@@ -368,6 +368,20 @@ from 17 to 8 by doing the refactoring, which is a reduction of 53%.
 
 The refactoring diff can be seen [here](https://github.com/Fundamentals-KTH-CSC-2022-P3/code-complexity/commit/491f4bec3ac84dd9355703c9514917e5bab28429).
 
+#### RedBlackBST::deleteFixup
+
+> Plan for refactoring complex code:
+
+As the question states _Is the high complexity you identified really necessary?_, I'd argue that it is in this case. Well, not neccessarily for a single function. Everything is a bit nested in a lot of conditionals and it's tricky to get a handle on what's going on. But the function is very simple, it only repaints the tree, following the tree down, left or right. It performs the opposite actions if the direction is left than if it's right. So the high Cyclomatic complexity is somewhat justified, but we can hide it behind smaller functions.
+
+> Estimated impact of refactoring (lower CC, but other drawbacks?).
+
+The aim is to lower CC and increase readability. This will however increase the number of lines in the class.
+
+> Carried out refactoring (optional, P+):
+
+The refactoring was successful. In the function in the diff below has a clearly lower cyclomatic complexity.
+
 ## Coverage
 
 ### Tools
