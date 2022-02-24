@@ -32,4 +32,24 @@ public class MaximumMinimumWindowTest {
         int[] res = MaximumMinimumWindow.calculateMaxOfMin(arr, arr.length);
         assertArrayEquals(target, res);
     }
+
+    /**
+     * Test the requirement to input an array of positive integers
+     */
+    @Test
+    void successTest3(){
+        int[] arr = new int[]{10, 10, 10};
+        int[] target = new int[]{10, 10, 10};
+        int[] res = MaximumMinimumWindow.calculateMaxOfMin(arr, arr.length);
+        assertArrayEquals(target, res);
+    }
+
+    /**
+     * Test if an exception is thrown when the input array contains negative integer
+     */
+    @Test
+    void exceptionThrownTest(){
+        int[] arr = new int[]{1, -10};
+        assertThrows(IllegalArgumentException.class, () -> MaximumMinimumWindow.calculateMaxOfMin(arr, arr.length));
+    }
 }
