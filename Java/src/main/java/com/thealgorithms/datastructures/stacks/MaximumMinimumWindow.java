@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Stack;
 
 /**
- * Given an integer array. The task is to find the maximum of the minimum of
+ * Given an positive integer array. The task is to find the maximum of the minimum of
  * every window size in the array. Note: Window size varies from 1 to the size
  * of the Array.
  * <p>
@@ -25,26 +25,14 @@ import java.util.Stack;
  * [10,20,30,10,10] and the maximum out of these is 30. Similarly we solve for
  * other window sizes.
  *
- * @author sahil
  */
 public class MaximumMinimumWindow {
 
-    /**
-     * This function contains the logic of finding maximum of minimum for every
-     * window size using Stack Data Structure.
-     *
-     * @param arr Array containing the numbers
-     * @param n Length of the array
-     * @return result array
-     */
-    public static int[] calculateMaxOfMin(int[] arr, int n) {
+    private static int[] smallerOnLeft(int[] arr){
+        // find indexes of the first smaller elements on the left side of each element
+        int n = arr.length;
+        int[] left = new int[n];
         Stack<Integer> s = new Stack<>();
-        int left[] = new int[n + 1];
-        int right[] = new int[n + 1];
-        for (int i = 0; i < n; i++) {
-            left[i] = -1;
-            right[i] = n;
-        }
 
         for (int i = 0; i < n; i++) {
             while (!s.empty() && arr[s.peek()] >= arr[i]) {
@@ -53,35 +41,57 @@ public class MaximumMinimumWindow {
 
             if (!s.empty()) {
                 left[i] = s.peek();
+            } else {
+                left[i] = -1;
             }
 
             s.push(i);
         }
+        return left;
+    }
 
-        while (!s.empty()) {
-            s.pop();
-        }
+    private static int[] smallerOnRight(int[] arr){
+        // find indexes of the first smaller elements on the right side of each element
+        int n = arr.length;
+        int[] right = new int[n];
+        Stack<Integer> s = new Stack<>();
 
-        for (int i = n - 1; i >= 0; i--) {
+        for (int i = n-1; i > -1; i--) {
             while (!s.empty() && arr[s.peek()] >= arr[i]) {
                 s.pop();
             }
 
             if (!s.empty()) {
                 right[i] = s.peek();
+            } else {
+                right[i] = n;
             }
 
             s.push(i);
         }
+        return right;
+    }
 
-        int ans[] = new int[n + 1];
+    /**
+     * This function contains the logic of finding maximum of minimum for every
+     * window size (from 1 to n), by comparing minimums of all
+     * lengths computed using left[] and right[]
+     *
+     * @param arr Array of positive integers.
+     * @return result array
+     */
+    public static int[] calculateMaxOfMin(int[] arr) {
+        int[] left = smallerOnLeft(arr);
+        int[] right = smallerOnRight(arr);
+        int n = arr.length;
+
+        int[] ans = new int[n + 1];
         for (int i = 0; i <= n; i++) {
             ans[i] = 0;
         }
 
         for (int i = 0; i < n; i++) {
             int len = right[i] - left[i] - 1;
-
             ans[len] = Math.max(ans[len], arr[i]);
         }
 
@@ -93,13 +103,15 @@ public class MaximumMinimumWindow {
         for (int i = 1; i <= n; i++) {
             System.out.print(ans[i] + " ");
         }
+        // remove the first element (an unwanted 0) in ans
+        ans = Arrays.copyOfRange(ans, 1, ans.length);
         return ans;
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         int[] arr = new int[]{10, 20, 30, 50, 10, 70, 30};
         int[] target = new int[]{70, 30, 20, 10, 10, 10, 10};
-        int[] res = calculateMaxOfMin(arr, arr.length);
+        int[] res = calculateMaxOfMin(arr);
         assert Arrays.equals(target, res);
     }
 
