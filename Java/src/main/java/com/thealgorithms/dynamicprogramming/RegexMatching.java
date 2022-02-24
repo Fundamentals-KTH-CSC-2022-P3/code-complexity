@@ -16,38 +16,41 @@ public class RegexMatching {
 
     // Method 1: Using Recursion
     // Time Complexity=0(2^(N+M)) Space Complexity=Recursion Extra Space
-    static boolean regexRecursion(String src, String pat) {
-        if (src.length() == 0 && pat.length() == 0) {
-            return true;
+    static boolean regexRecursion(String source, String wildcardPattern) {
+        if (wildcardPattern.length() == 0) {
+            return source.length() == 0;
         }
-        if (src.length() != 0 && pat.length() == 0) {
+        if (source.length() == 0) {
+            return onlyContainsWildcards(wildcardPattern);
+        }
+        char sourceHead = source.charAt(0);
+        char patternHead = wildcardPattern.charAt(0);
+
+        String sourceBody = source.substring(1);
+        String patternBody = wildcardPattern.substring(1);
+
+        if (sourceHead == patternHead || patternHead == '?') {
+            return regexRecursion(sourceBody, patternBody);
+        } else if (patternHead == '*') {
+            boolean blank = regexRecursion(source, patternBody);
+            boolean multiple = regexRecursion(sourceBody, wildcardPattern);
+            if (blank)
+                return true;
+            if (multiple)
+                return true;
             return false;
         }
-        if (src.length() == 0 && pat.length() != 0) {
-            for (int i = 0; i < pat.length(); i++) {
-                if (pat.charAt(i) != '*') {
-                    return false;
-                }
+        return false;
+
+    }
+
+    private static boolean onlyContainsWildcards(String wildcardPattern) {
+        for (int i = 0; i < wildcardPattern.length(); i++) {
+            if (wildcardPattern.charAt(i) != '*') {
+                return false;
             }
-            return true;
         }
-        char chs = src.charAt(0);
-        char chp = pat.charAt(0);
-
-        String ros = src.substring(1);
-        String rop = pat.substring(1);
-
-        boolean ans;
-        if (chs == chp || chp == '?') {
-            ans = regexRecursion(ros, rop);
-        } else if (chp == '*') {
-            boolean blank = regexRecursion(src, rop);
-            boolean multiple = regexRecursion(ros, pat);
-            ans = blank || multiple;
-        } else {
-            ans = false;
-        }
-        return ans;
+        return true;
     }
 
     // Method 2: Using Recursion and breaking string using virtual index
@@ -59,13 +62,8 @@ public class RegexMatching {
         if (src.length() != svidx && pat.length() == pvidx) {
             return false;
         }
-        if (src.length() == svidx && pat.length() != pvidx) {
-            for (int i = pvidx; i < pat.length(); i++) {
-                if (pat.charAt(i) != '*') {
-                    return false;
-                }
-            }
-            return true;
+        if (src.length() == svidx) {
+            return onlyContainsWildcards(pat);
         }
         char chs = src.charAt(svidx);
         char chp = pat.charAt(pvidx);
@@ -92,13 +90,8 @@ public class RegexMatching {
         if (src.length() != svidx && pat.length() == pvidx) {
             return false;
         }
-        if (src.length() == svidx && pat.length() != pvidx) {
-            for (int i = pvidx; i < pat.length(); i++) {
-                if (pat.charAt(i) != '*') {
-                    return false;
-                }
-            }
-            return true;
+        if (src.length() == svidx) {
+            return onlyContainsWildcards(pat);
         }
         if (strg[svidx][pvidx] != 0) {
             return strg[svidx][pvidx] == 1 ? false : true;
