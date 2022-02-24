@@ -40,6 +40,10 @@ public class MaximumMinimumWindow {
      * @return result array
      */
     public static int[] calculateMaxOfMin(int[] arr, int n) {
+        if (!checkIntArray(arr)){
+            throw new IllegalArgumentException("The input array contains negative integer");
+        }
+
         Stack<Integer> s = new Stack<>();
         int left[] = new int[n + 1];
         int right[] = new int[n + 1];
@@ -98,6 +102,15 @@ public class MaximumMinimumWindow {
         // remove the first element (an unwanted 0) in ans
         ans = Arrays.copyOfRange(ans, 1, ans.length);
         return ans;
+    }
+
+    private static boolean checkIntArray(int[] arr){
+        // check if all integers are positive in arr
+        for (int j : arr) {
+            if (j < 0)
+                return false;
+        }
+        return true;
     }
 
     public static void main(String args[]) {
